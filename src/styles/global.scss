@@ -1,0 +1,66 @@
+@font-face {
+  font-family: 'SF-Medium';
+  src: url('../assets/fonts/sf-medium.woff2') format('woff2'),
+  url('../assets/fonts/sf-medium.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'SF-Light';
+  src: url('../assets/fonts/sf-light.woff2') format('woff2'),
+  url('../assets/fonts/sf-light.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'SF-Bold';
+  src: url('../assets/fonts/sf-bold.woff2') format('woff2'),
+  url('../assets/fonts/sf-bold.woff') format('woff');
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  text-decoration: none;
+}
+
+html {
+  font-family: 'SF-Medium', monospace;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  overflow: hidden;
+  line-height: 1;
+}
+
+html,
+body {
+  overscroll-behavior: none;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+}
+
+ol,
+ul {
+  list-style: none;
+}

@@ -1,0 +1,92 @@
+import React, { useEffect, useState } from 'react';
+
+import { useHistory } from 'react-router-dom';
+
+import useApiRequest from '../../../hooks/useApiRequest';
+import { useDispatch, useSelector } from 'react-redux';
+import { collectionsSelector, renameCollection } from '../../../slices/collections/collectionsSlice';
+
+import DeleteCollection from '../DeleteCollection/DeleteCollection';
+
+import { Container } from './EditCollection.style';
+import { IconColEdit, IconFolder } from '../../../assets/icons/Icons';
+
+const EditCollection = ({ name }: any) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [data, setData] = useState(name);
+
+  const { updateCollectionsInApi } = useApiRequest();
+  const history = useHistory();
+
+  const dispatch = useDispatch();
+  const collections = useSelector(collectionsSelector);
+
+  useEffect(() => {
+    setData(name);
+  }, [name]);
+
+  const handleChange = (e: any) => {
+    e.preventDefault();
+    setData(e.target.value);
+  };
+
+  const handleSave = async (e: any) => {
+    if (e.charCode === 13) {
+      e.preventDefault();
+      setIsEditing(false);
+      history.push(`/gists/${data}`);
+
+      dispatch(renameCollection({ name: name, newName: data }));
+
+      const renamedCollection = collections.map(collection => {
+        if (collection.name === name) {
+          return {
+            name: data,
+            gists: [...collection.gists],
+          };
+        } else {
+          return collection;
+        }
+      });
+
+      await updateCollectionsInApi(renamedCollection);
+    }
+  };
+
+  return (
+    <Container>
+      <div className='name'>
+        {isEditing ? (
+          <>
+            <div className='icon'>
+              <IconFolder />
+            </div>
+            <form>
+              <input
+                name='name'
+                value={data}
+                autoComplete='off'
+                autoFocus
+                onChange={e => handleChange(e)}
+                onKeyPress={e => handleSave(e)}
+              />
+            </form>
+          </>
+        ) : (
+          <div className='folder'>
+            <IconFolder />
+            <span>{name}</span>
+          </div>
+        )}
+      </div>
+      <div className='options'>
+        {isEditing && <DeleteCollection name={name} />}
+        <span onClick={() => setIsEditing(!isEditing)}>
+          <IconColEdit />
+        </span>
+      </div>
+    </Container>
+  );
+};
+
+export default EditCollection;
