@@ -20,4 +20,8 @@ Soon
 
 
 
-![alt text](https://github.com/koniecznytomek/Sneepe/blob/master/screens/sneepe-1.jpg "Sneepe")
+![alt text](https://github.com/koniecznytomek/Sneepe/blob/master/static/1.jpg "Sneepe")
+
+![alt text](https://github.com/koniecznytomek/Sneepe/blob/master/static/2.jpg "Sneepe")
+
+![alt text](https://github.com/koniecznytomek/Sneepe/blob/master/static/3.jpg "Sneepe")
