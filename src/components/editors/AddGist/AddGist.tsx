@@ -1,43 +1,46 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container } from './AddGist.style';
-import useApiRequest from '../../../hooks/useApiRequest';
+import useRequest from '../../../api/useRequest';
 import { useParams } from 'react-router-dom';
 import TextareaAutosize from 'react-autosize-textarea';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import ReactMarkdown from 'react-markdown';
 import { Dark, Light, Dusk } from '../../../assets/themes';
 import { useSelector } from 'react-redux';
-import { themeSelector } from '../../../slices/theme/themeSlice';
+import { getTheme } from '../../../slices/theme/themeSlice';
+import { IconColDelete, IconMdView } from '../../../assets/icons/Icons';
+import Markdown from '../../features/Markdown/Markdown';
 
 const AddGist = () => {
+  const [error, setError] = useState<boolean>(true);
+  const [duplicates, setDuplicates] = useState<string[]>([]);
+  const [mdView, setMdView] = useState<boolean>(false);
+
   const [content, setContent] = useState({
     description: '',
     isPublic: false,
-    files: [{ name: '', text: ' ' }],
-    note: {name: '', text: ''}
+    files: [{ name: '', text: '\n' }],
+    note: { name: '', text: '' },
   });
 
   const { collection } = useParams<any>();
-  const { addGistToApi } = useApiRequest();
-  const theme = useSelector(themeSelector);
+  const { addGistToApi } = useRequest();
+  const theme = useSelector(getTheme);
 
-  const renderers = {
-    code: ({ language, value = 'code' }: any) => {
-      return (
-        <SyntaxHighlighter
-          style={
-            {
-              light: Light,
-              dark: Dark,
-              dusk: Dusk,
-            }[theme as keyof Object]
-          }
-          language={language}
-          children={value}
-        />
-      );
-    },
-  };
+  useEffect(() => {
+    content.files.some(file => file.name.length > 0)
+      ? setError(false)
+      : setError(true);
+
+    const filenames = content.files.map(file => file.name);
+    const hasDuplicate = filenames.some((a, i) => filenames.indexOf(a) !== i);
+
+    setDuplicates([
+      ...new Set(
+        filenames.filter((value, index, self) => self.indexOf(value) !== index)
+      ),
+    ]);
+    hasDuplicate && setError(true);
+  }, [content.files]);
 
   const handleVisibility = () => {
     setContent({ ...content, isPublic: !content.isPublic });
@@ -57,7 +60,7 @@ const AddGist = () => {
 
     setContent({
       ...content,
-      note: { name: value, text: content.note.text},
+      note: { name: value, text: content.note.text },
     });
   };
   const handleNoteChange = (e: any) => {
@@ -65,7 +68,7 @@ const AddGist = () => {
 
     setContent({
       ...content,
-      note: {name: content.note.name, text: value},
+      note: { name: content.note.name, text: value },
     });
   };
 
@@ -93,100 +96,128 @@ const AddGist = () => {
   const handleFileAdd = () => {
     setContent({
       ...content,
-      files: [...content.files, { name: '', text: '' }],
+      files: [...content.files, { name: '', text: '\n' }],
+    });
+  };
+
+  const handleFileDelete = (e: any, index: number) => {
+    setContent({
+      ...content,
+      files: content.files.filter((file, i) => i !== index),
     });
   };
 
   const handleDraft = () => {
     const id = () => {
-      return (
-        '_' +
-        Math.random()
-          .toString(36)
-          .substr(2, 9)
-      );
+      return '_' + Math.random().toString(36).substr(2, 9);
     };
     console.log(id);
   };
 
   const handleSave = async () => {
-    await addGistToApi(content, collection);
+    !error && (await addGistToApi(content, collection));
   };
 
   return (
     <Container>
       <form>
-        <div className='description'>
-          <input
-            name='title'
-            placeholder='Title'
-            onChange={e => handleTitleChange(e)}
-          />
-          <textarea
-            name='note'
-            placeholder='Note'
-            rows={5}
-            onChange={e => handleNoteChange(e)}
-          />
-        </div>
-
         <div className='note'>
-          <ReactMarkdown renderers={renderers} children={content.note.text} />
+          <div className='note-title'>
+            <input
+              name='title'
+              placeholder='Gist name'
+              autoComplete='off'
+              spellCheck='false'
+              onChange={e => handleTitleChange(e)}
+            />
+          </div>
+          <div className='note-options'>
+            <span onClick={()=>setMdView(!mdView)}><IconMdView /></span>
+          </div>
+          {!mdView ? (
+            <div className='note-editor'>
+              <textarea
+                name='note'
+                value={content.note.text}
+                placeholder='Note'
+                autoComplete='off'
+                spellCheck='false'
+                rows={10}
+                onChange={e => handleNoteChange(e)}
+              />
+            </div>
+          ) : (
+            <div className='note-viewer'>
+              <Markdown text={content.note.text} />
+            </div>
+          )}
         </div>
-
         <div className='description'>
           <textarea
             name='description'
-            placeholder='Description on Github'
+            placeholder='Description'
+            autoComplete='off'
+            spellCheck='false'
             rows={5}
             onChange={e => handleContentChange(e)}
           />
         </div>
-        {content.files &&
-          content.files.map((file, index) => (
-            <span key={index}>
-              <div className='title-bar'>
-                <div className='title'>
-                  <input
-                    name='name'
-                    placeholder='Filename'
-                    onChange={e => handleFilesChange(e, index)}
-                  />
-                </div>
+        {content.files?.map((file, index) => (
+          <div key={index} className='file'>
+            <div className='title-bar'>
+              <div className='title'>
+                <input
+                  name='name'
+                  placeholder='Filename'
+                  autoComplete='off'
+                  spellCheck='false'
+                  value={file.name}
+                  className={duplicates.includes(file.name) ? 'error' : ''}
+                  onChange={e => handleFilesChange(e, index)}
+                />
               </div>
-
-              <div className='snippet'>
-                <div className='output'>
-                  <SyntaxHighlighter
-                    language='javascript'
-                    children={file.text}
-                    style={
-                      {
-                        light: Light,
-                        dark: Dark,
-                        dusk: Dusk,
-                      }[theme as keyof Object]
-                    }
-                    showLineNumbers
-                    lineNumberStyle={{ minWidth: '40px' }}
-                  />
-                </div>
-                <div className='textarea'>
-                  <TextareaAutosize
-                    name='text'
-                    defaultValue={file.text}
-                    spellCheck='false'
-                    onChange={(e: any) => handleFilesChange(e, index)}
-                  />
-                </div>
+              <div className='options'>
+                <span onClick={e => handleFileDelete(e, index)}>
+                  <IconColDelete />
+                </span>
               </div>
-            </span>
-          ))}
-
-        <span className='save' onClick={() => handleSave()}>
-          save
-        </span>
-        <span className='draft' onClick={() => handleDraft()}>
+            </div>
+            <div className='snippet'>
+              <div className='output'>
+                <SyntaxHighlighter
+                  language='javascript'
+                  children={file.text}
+                  style={
+                    {
+                      light: Light,
+                      dark: Dark,
+                      dusk: Dusk,
+                    }[theme as keyof Object]
+                  }
+                  showLineNumbers
+                  lineNumberStyle={{ minWidth: '40px' }}
+                />
+              </div>
+              <div className='textarea'>
+                <TextareaAutosize
+                  name='text'
+                  defaultValue={file.text}
+                  autoComplete='off'
+                  spellCheck='false'
+                  onChange={(e: any) => handleFilesChange(e, index)}
+                />
+              </div>
+            </div>
+          </div>
+        ))}
+      </form>
+      <div className='buttons'>
+        {!error && (
+          <span className='save' onClick={() => handleSave()}>
+            save
+          </span>
+        )}
+        <span className='cancel' onClick={() => handleDraft()}>
           draft
         </span>
         <span className='cancel' onClick={() => handleFileAdd()}>
@@ -195,7 +226,7 @@ const AddGist = () => {
         <span className='cancel' onClick={() => handleVisibility()}>
           {content.isPublic ? 'Public' : 'Private'}
         </span>
-      </form>
+      </div>
     </Container>
   );
 };

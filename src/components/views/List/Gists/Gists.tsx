@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Route, Redirect, useRouteMatch } from 'react-router';
 import { useSelector } from 'react-redux';
-import { gistsSelector } from '../../../../slices/gists/gistsSlice';
+import { getGists } from '../../../../slices/gists/gistsSlice';
 
 import { Container } from './Gists.style';
 import Li from '../Li/Li';
@@ -14,7 +14,7 @@ export interface MatchParams {
 const Gists = () => {
   const [search, setSearch] = useState('');
 
-  const gists = useSelector(gistsSelector);
+  const gists = useSelector(getGists);
   const container = useRef<HTMLDivElement>(null);
   const match = useRouteMatch<MatchParams>();
 

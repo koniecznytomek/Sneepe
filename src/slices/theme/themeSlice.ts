@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../store/rootReducer';
 
 const initialState = {
-  mode: 'light'
+  mode: 'dusk'
 };
 
 const themeSlice = createSlice({
@@ -15,6 +15,6 @@ const themeSlice = createSlice({
   },
 });
 
-export const themeSelector = (state: RootState) => state.theme.mode;
+export const getTheme = (state: RootState) => state.theme.mode;
 export const { setTheme } = themeSlice.actions;
 export default themeSlice.reducer;

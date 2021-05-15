@@ -1,17 +1,20 @@
 import { Octokit } from '@octokit/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { tokenSelector } from '../slices/auth/authSlice';
-import { gistsSelector, addGist } from '../slices/gists/gistsSlice';
-import { collectionsSelector, addToCollection } from '../slices/collections/collectionsSlice';
+import { getToken } from '../slices/auth/authSlice';
+import { getGists, addGist } from '../slices/gists/gistsSlice';
+import {
+  getCollections,
+  addToCollection,
+} from '../slices/collections/collectionsSlice';
 
-const useApiRequest = () => {
+const useRequest = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const gists = useSelector(gistsSelector);
-  const collections = useSelector(collectionsSelector);
-  const token = useSelector(tokenSelector);
+  const gists = useSelector(getGists);
+  const collections = useSelector(getCollections);
+  const token = useSelector(getToken);
 
   const octokit = new Octokit({ auth: token });
 
@@ -36,7 +39,9 @@ const useApiRequest = () => {
 
     const gist: any = {
       description: content.description,
-      files: { ...filesObject, noteObject },
+      files: noteObject.content
+        ? { ...filesObject, noteObject }
+        : { ...filesObject },
       public: content.isPublic,
     };
 
@@ -48,14 +53,16 @@ const useApiRequest = () => {
           createdAt: response.data.created_at,
           updatedAt: response.data.updated_at,
           description: content.description,
-          files: [
-            ...filesArray,
-            {
-              name: content.note.name + '.sneepe.md',
-              text: content.note.text,
-              extension: 'md',
-            },
-          ],
+          files: content.note.text
+            ? [
+                ...filesArray,
+                {
+                  name: content.note.name + '.sneepe.md',
+                  text: content.note.text,
+                  extension: 'md',
+                },
+              ]
+            : [...filesArray],
           public: content.isPublic,
         };
 
@@ -107,6 +114,27 @@ const useApiRequest = () => {
     }
   };
 
+  const updateFileInApi = async (
+    name: string,
+    filename: string,
+    newFilename: string,
+    text: string
+  ) => {
+    try {
+      await octokit.request(`PATCH /gists/${name}`, {
+        files: {
+          [filename]: {
+            filename: newFilename,
+            content: text,
+          },
+        },
+      });
+    } catch (error) {
+      console.log(error);
+      // offline trigger
+    }
+  };
+
   const deleteFileFromApi = async (name: string, filename: string) => {
     await octokit.request(`PATCH /gists/${name}`, {
       files: {
@@ -145,10 +173,11 @@ const useApiRequest = () => {
   return {
     addGistToApi,
     addFileToApi,
+    updateFileInApi,
     deleteFileFromApi,
     deleteGistFromApi,
     updateCollectionsInApi,
   };
 };
 
-export default useApiRequest;
+export default useRequest;

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-import useApiRequest from '../../../hooks/useApiRequest';
+import useRequest from '../../../api/useRequest';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteFile, deleteGist } from '../../../slices/gists/gistsSlice';
 import {
-  collectionsSelector,
+  getCollections,
   addCollections,
 } from '../../../slices/collections/collectionsSlice';
 import { Files } from '../../../slices/gists/types';
@@ -25,13 +25,11 @@ const DeleteFile = ({ name, filename, files }: Props) => {
     deleteFileFromApi,
     deleteGistFromApi,
     updateCollectionsInApi,
-  } = useApiRequest();
+  } = useRequest();
 
   const dispatch = useDispatch();
+  const collections = useSelector(getCollections);
 
-  const collections = useSelector(collectionsSelector);
-
-  // if gist will be deleted, we almost must delete him from all collections
   const updatedCollections = collections.map(col => {
     if (col.gists.includes(name)) {
       return {
@@ -76,7 +74,7 @@ const DeleteFile = ({ name, filename, files }: Props) => {
 
   return (
     <Container>
-      <span className='delete' onClick={() => setOverlay(true)}>
+      <span className='cancel' onClick={() => setOverlay(true)}>
         Delete
       </span>
       {overlay && (

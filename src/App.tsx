@@ -1,7 +1,7 @@
 import React from 'react';
 import { HashRouter } from 'react-router-dom';
 import Root from './components/layout/Root/Root';
-import FetchData from './components/api/FetchData';
+import FetchAllGists from './api/fetchAllGists';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { relayStylePagination } from '@apollo/client/utilities';
 import { useSelector } from 'react-redux';
@@ -28,7 +28,7 @@ function App() {
   return (
     <HashRouter>
       <ApolloProvider client={client}>
-        <FetchData />
+        <FetchAllGists />
       </ApolloProvider>
       <Root />
     </HashRouter>

@@ -3,13 +3,13 @@ import { Container } from './Snippet.style';
 //import useCopyToClipboard from '../../../../hooks/useCopyToClipboard';
 
 import { useSelector } from 'react-redux';
-import { themeSelector } from '../../../../slices/theme/themeSlice';
+import { getTheme } from '../../../../slices/theme/themeSlice';
 
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { Dark, Light, Dusk } from '../../../../assets/themes/';
 
 const Snippet = ({ text, language }: any) => {
-  const theme = useSelector(themeSelector);
+  const theme = useSelector(getTheme);
   const lang = language && language.name.toLowerCase();
 
   return (
@@ -18,7 +18,7 @@ const Snippet = ({ text, language }: any) => {
         language={lang}
         style={
           {
-            light: Dusk,
+            light: Light,
             dark: Dark,
             dusk: Dusk,
           }[theme as keyof Object]

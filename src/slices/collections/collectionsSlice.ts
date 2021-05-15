@@ -49,7 +49,7 @@ const collectionsSlice = createSlice({
   },
 });
 
-export const collectionsSelector = (state: RootState) =>
+export const getCollections = (state: RootState) =>
   state.collectionsState.collections;
 
 export const {

@@ -4,25 +4,25 @@ import { IconFolder } from '../../../../assets/icons/Icons';
 import { NavLink } from 'react-router-dom';
 
 import AddCollection from '../../../editors/AddCollection/AddCollection';
-import useApiRequest from '../../../../hooks/useApiRequest';
+import useRequest from '../../../../api/useRequest';
 
 import {
   addToCollection,
-  collectionsSelector,
+  getCollections,
   deleteFromCollection,
 } from '../../../../slices/collections/collectionsSlice';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { draggedSelector } from '../../../../slices/gist/gistSlice';
-import { gistsSelector } from '../../../../slices/gists/gistsSlice';
+import { getDragged } from '../../../../slices/gist/gistSlice';
+import { getGists } from '../../../../slices/gists/gistsSlice';
 
 const Collections = () => {
   const dispatch = useDispatch();
-  const gists = useSelector(gistsSelector);
-  const collections = useSelector(collectionsSelector);
-  const dragged = useSelector(draggedSelector);
+  const gists = useSelector(getGists);
+  const collections = useSelector(getCollections);
+  const dragged = useSelector(getDragged);
 
-  const { updateCollectionsInApi } = useApiRequest();
+  const { updateCollectionsInApi } = useRequest();
 
   const counter = (name: string) => {
     const collection = collections.find(item => item.name === name);

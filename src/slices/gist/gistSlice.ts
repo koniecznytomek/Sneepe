@@ -18,6 +18,6 @@ const gistSlice = createSlice({
   },
 });
 
-export const draggedSelector = (state: RootState) => state.gist;
+export const getDragged = (state: RootState) => state.gist;
 export const { setDragged } = gistSlice.actions;
 export default gistSlice.reducer;

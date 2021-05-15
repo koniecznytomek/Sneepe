@@ -11,15 +11,15 @@ export const blue = theme('theme', {
       fill: #74aeea;
     }
   `,
-  dark: css`
+  dusk: css`
     .st0 {
-      fill: #2f2f2f;
+      fill: none;
     }
     .st1 {
       fill: #74aeea;
     }
   `,
-  dusk: css`
+  dark: css`
     .st0 {
       fill: #2a2c34;
     }
@@ -38,7 +38,7 @@ export const red = theme('theme', {
       fill: #c66661;
     }
   `,
-  dark: css`
+  dusk: css`
     .st0 {
       fill: #2f2f2f;
     }
@@ -46,7 +46,7 @@ export const red = theme('theme', {
       fill: #d65555;
     }
   `,
-  dusk: css`
+  dark: css`
     .st0 {
       fill: #2f2f2f;
     }
@@ -102,7 +102,7 @@ export const Container = styled.div`
   }
 
   .coldelete {
-    width: 9px;
+    width: 10px;
     fill: ${color.red};
   }
 
@@ -134,5 +134,10 @@ export const Container = styled.div`
   .search {
     width: 11px;
     fill: #ccc;
+  }
+
+  .mdview {
+    width: 15px;
+    fill: ${color.blue};
   }
 `;

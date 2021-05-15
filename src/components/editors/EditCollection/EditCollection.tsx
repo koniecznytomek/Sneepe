@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 
 import { useHistory } from 'react-router-dom';
 
-import useApiRequest from '../../../hooks/useApiRequest';
+import useRequest from '../../../api/useRequest';
 import { useDispatch, useSelector } from 'react-redux';
-import { collectionsSelector, renameCollection } from '../../../slices/collections/collectionsSlice';
+import { getCollections, renameCollection } from '../../../slices/collections/collectionsSlice';
 
 import DeleteCollection from '../DeleteCollection/DeleteCollection';
 
@@ -15,11 +15,11 @@ const EditCollection = ({ name }: any) => {
   const [isEditing, setIsEditing] = useState(false);
   const [data, setData] = useState(name);
 
-  const { updateCollectionsInApi } = useApiRequest();
+  const { updateCollectionsInApi } = useRequest();
   const history = useHistory();
 
   const dispatch = useDispatch();
-  const collections = useSelector(collectionsSelector);
+  const collections = useSelector(getCollections);
 
   useEffect(() => {
     setData(name);

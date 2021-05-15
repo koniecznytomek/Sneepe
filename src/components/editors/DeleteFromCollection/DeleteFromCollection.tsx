@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import useApiRequest from '../../../hooks/useApiRequest';
+import useRequest from '../../../api/useRequest';
 import { useDispatch, useSelector } from 'react-redux';
-import { collectionsSelector, deleteFromCollection } from '../../../slices/collections/collectionsSlice';
+import { getCollections, deleteFromCollection } from '../../../slices/collections/collectionsSlice';
 
 import { Container } from './DeleteFromCollection.style';
 import { IconCancel, IconConfirm } from '../../../assets/icons/Icons';
@@ -15,9 +15,9 @@ interface Props {
 const DeleteFromCollection = ({ name, collection }: Props) => {
   const [overlay, setOverlay] = useState(false);
 
-  const { updateCollectionsInApi } = useApiRequest();
+  const { updateCollectionsInApi } = useRequest();
   const dispatch = useDispatch();
-  const collections = useSelector(collectionsSelector);
+  const collections = useSelector(getCollections);
 
   // @ts-ignore
   useEffect(() => {

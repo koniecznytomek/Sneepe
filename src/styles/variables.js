@@ -1,6 +1,7 @@
 import { css } from 'styled-components';
 import theme from 'styled-theming';
 
+
 export const color = {
   white: '#fff',
   black: '#454545',
@@ -9,24 +10,24 @@ export const color = {
   red: '#e85751',
   yellow: '#FCE8C8',
 
-  darkGrey: '#2f2f2f',
-  darkDusk: '#2A2C34',
+  darkDusk: '#29314E',
+  darkGraphite: '#2A2C34',
 
-  lightGrey: '#fbfcfc',
-  lightDusk: '#2B2D35',
+  lightDusk: '#29314E',
+  lightGraphite: '#2B2D35',
 
-  hoverGrey: '#333333',
-  hoverDusk: '#30323B',
+  hoverDusk: '#2A3250',
+  hoverGraphite: '#30323B',
 
   snippetLight: '#fbfcfc',
-  snippetDark: '#333',
-  snippetDusk: '#2B2D35',
+  snippetDark: '#2A3250',
+  snippetDusk: '#2A2C34',
 };
 
 export const mainText = theme('theme', {
   light: `${color.black}`,
-  dark: `${color.white}`,
   dusk: `${color.white}`,
+  dark: `${color.white}`,
 });
 
 export const font = {
@@ -58,26 +59,26 @@ export const regularFont = css`
 
 export const primaryBackground = theme('theme', {
   light: `${color.white}`,
-  dark: `${color.darkGrey}`,
   dusk: `${color.darkDusk}`,
+  dark: `${color.darkGraphite}`,
 });
 
 export const secondaryBackground = theme('theme', {
   light: `${color.white}`,
-  dark: `#333`,
   dusk: `${color.lightDusk}`,
+  dark: `${color.lightGraphite}`,
 });
 
 export const hoverBackground = theme('theme', {
   light: `${color.lightBlue}`,
-  dark: `${color.hoverGrey}`,
   dusk: `${color.hoverDusk}`,
+  dark: `${color.hoverGraphite}`,
 });
 
 export const border = theme('theme', {
-  light: '#EDEDED',
-  dark: '#444',
-  dusk: '#24262E',
+  light: '#f0f3f4',
+  dusk: '#2D3859',
+  dark: '#24262E',
 });
 
 export const counter = theme('theme', {
@@ -85,39 +86,39 @@ export const counter = theme('theme', {
     font-size: 7px;
     padding: 3px 5px;
     border-radius: 8px;
-    border: 1px solid #eaf2fa;
+    border: 1px solid ${border};
     color: #202020;
-    background: #f6fafe;
-  `,
-  dark: css`
-    font-size: 7px;
-    padding: 3px 5px;
-    border-radius: 8px;
-    border: 1px solid #454545;
-    color: #ccc;
-    background: #383838;
+    background: #fbfbfb;
   `,
   dusk: css`
     font-size: 7px;
     padding: 3px 5px;
     border-radius: 8px;
+    border: 1px solid ${border};
     color: #ccc;
     background: ${color.hoverDusk};
+  `,
+  dark: css`
+    font-size: 7px;
+    padding: 3px 5px;
+    border-radius: 8px;
+    color: #ccc;
+    background: ${color.hoverGraphite};
   `,
 });
 
 export const lang = theme('theme', {
   light: css`
     border: 1px solid ${border};
-    background: ${color.lightGrey};
-  `,
-  dark: css`
-    border: 1px solid ${border};
-    background: #383838;
+    background: #fbfbfb;
   `,
   dusk: css`
     border: 1px solid ${border};
-     background: ${color.hoverDusk};
+    background: ${color.hoverDusk};
+  `,
+  dark: css`
+    border: 1px solid ${border};
+     background: ${color.hoverGraphite};
   `,
 });
 
@@ -132,10 +133,10 @@ export const isPublic = theme('theme', {
       transform: translate(2px, -3px);
     }
   `,
-  dark: css`
-    border: 1px solid #454545;
+  dusk: css`
+    border: 1px solid ${border};
     border-radius: 18px;
-    background: #383838;
+    background: ${color.hoverDusk};
     padding: 0 3px;
     .lock {
       fill: #ccc;
@@ -143,9 +144,9 @@ export const isPublic = theme('theme', {
       transform: translate(2px, -3px);
     }
   `,
-  dusk: css`
+  dark: css`
     border-radius: 18px;
-    background: ${color.hoverDusk};
+    background: ${color.hoverGraphite};
     padding: 0 3px;
     .lock {
       fill: #ccc;
@@ -158,8 +159,8 @@ export const isPublic = theme('theme', {
 export const scrollbar = theme('theme', {
   light: css`
     &::-webkit-scrollbar {
-      width: 5px;
-      height: 5px;
+      width: 10px;
+      height: 7px;
     }
 
     &::-webkit-scrollbar-track {
@@ -169,29 +170,14 @@ export const scrollbar = theme('theme', {
 
     &::-webkit-scrollbar-thumb {
       border-radius: 5px;
-      background: ${color.blue};
-    }
-  `,
-  dark: css`
-    &::-webkit-scrollbar {
-      width: 5px;
-      height: 5px;
-    }
-
-    &::-webkit-scrollbar-track {
-      border-radius: 10px;
-      background: none;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      border-radius: 5px;
-      background: #666666;
+      border: 1px solid #DBDBDB;
+      background: #E5E5E5;
     }
   `,
   dusk: css`
     &::-webkit-scrollbar {
-      width: 5px;
-      height: 5px;
+      width: 10px;
+      height: 7px;
     }
 
     &::-webkit-scrollbar-track {
@@ -201,7 +187,25 @@ export const scrollbar = theme('theme', {
 
     &::-webkit-scrollbar-thumb {
       border-radius: 5px;
-      background: #666666;
+      border: 1px solid #272C40;
+      background: #484D61;
+    }
+  `,
+  dark: css`
+    &::-webkit-scrollbar {
+      width: 10px;
+      height: 7px;
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: 10px;
+      background: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 5px;
+      border: 1px solid #24262E;
+      background: #454545;
     }
   `,
 });
@@ -256,9 +260,7 @@ export const deleteConfirm = css`
       }
     }
   }
-
-  span.delete {
-    cursor: pointer;
-    opacity: 0.99;
-  }
 `;
+
+
+

@@ -11,10 +11,10 @@ export const Container = styled.div`
   .file {
     grid-row: 1;
     grid-column: 1 / -1;
-    color: ${mainText};
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
+    padding: 25px;
 
     .title-bar {
       display: flex;

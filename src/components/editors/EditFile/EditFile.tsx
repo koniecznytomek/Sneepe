@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { tokenSelector } from '../../../slices/auth/authSlice';
-import { themeSelector } from '../../../slices/theme/themeSlice';
+import { getTheme } from '../../../slices/theme/themeSlice';
 import { updateFile } from '../../../slices/gists/gistsSlice';
-
 import { Files } from '../../../slices/gists/types';
-import { Octokit } from '@octokit/core';
+import useRequest from '../../../api/useRequest';
 
 import TextareaAutosize from 'react-autosize-textarea';
 import SyntaxHighlighter from 'react-syntax-highlighter';
@@ -27,8 +25,8 @@ const EditFile = ({ name, file, files, trigger }: Props) => {
   const [titleExists, setTitleExists] = useState(false);
 
   const dispatch = useDispatch();
-  const token = useSelector(tokenSelector);
-  const theme = useSelector(themeSelector);
+  const { updateFileInApi } = useRequest();
+  const theme = useSelector(getTheme);
 
   const filename = file.name;
   const code = file.text;
@@ -60,20 +58,9 @@ const EditFile = ({ name, file, files, trigger }: Props) => {
 
   const handleSave = async (e: React.MouseEvent<HTMLSpanElement>) => {
     e.preventDefault();
-
-    const octokit = new Octokit({ auth: token });
-    dispatch(updateFile({name, filename, data}));
-
     trigger(false);
-
-    await octokit.request(`PATCH /gists/${name}`, {
-      files: {
-        [filename]: {
-          filename: data.name,
-          content: data.text,
-        },
-      },
-    });
+    dispatch(updateFile({ name, filename, data }));
+    await updateFileInApi(name, filename, data.name, data.text);
   };
 
   const handleCancel = () => {
@@ -82,13 +69,13 @@ const EditFile = ({ name, file, files, trigger }: Props) => {
 
   return (
     <Container>
-      <div className='editfile'>
         <form>
           <div className='title-bar'>
             <div className='title'>
               <input
                 name='name'
                 autoFocus
+                autoComplete='off'
                 spellCheck='false'
                 defaultValue={data.name}
                 onChange={e => handleChange(e)}
@@ -126,7 +113,7 @@ const EditFile = ({ name, file, files, trigger }: Props) => {
         </form>
 
         {data.name.length > 0 && (
-          <div className='form-buttons'>
+          <div className='buttons'>
             <span className='save' onClick={e => handleSave(e)}>
               {!titleExists && 'save'}
             </span>
@@ -136,7 +123,6 @@ const EditFile = ({ name, file, files, trigger }: Props) => {
             </span>
           </div>
         )}
-      </div>
     </Container>
   );
 };

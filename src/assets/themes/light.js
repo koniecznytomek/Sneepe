@@ -54,34 +54,34 @@ export default {
     color: '#50a14f',
   },
   'hljs-built_in': {
-    color: '#c18401',
+    color: '#2272a0',
   },
   'hljs-class .hljs-title': {
-    color: '#c18401',
+    color: '#2272a0',
   },
   'hljs-attr': {
-    color: '#986801',
+    color: '#2272a0',
   },
   'hljs-variable': {
-    color: '#986801',
+    color: '#2272a0',
   },
   'hljs-template-variable': {
-    color: '#986801',
+    color: '#2272a0',
   },
   'hljs-type': {
-    color: '#986801',
+    color: '#2272a0',
   },
   'hljs-selector-class': {
-    color: '#986801',
+    color: '#2272a0',
   },
   'hljs-selector-attr': {
-    color: '#986801',
+    color: '#2272a0',
   },
   'hljs-selector-pseudo': {
-    color: '#986801',
+    color: '#2272a0',
   },
   'hljs-number': {
-    color: '#986801',
+    color: '#2272a0',
   },
   'hljs-symbol': {
     color: '#4078f2',

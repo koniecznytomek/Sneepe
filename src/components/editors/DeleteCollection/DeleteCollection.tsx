@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import useApiRequest from '../../../hooks/useApiRequest';
+import useRequest from '../../../api/useRequest';
 import { useDispatch, useSelector } from 'react-redux';
-import { collectionsSelector, deleteCollection } from '../../../slices/collections/collectionsSlice';
+import { getCollections, deleteCollection } from '../../../slices/collections/collectionsSlice';
 
 import { Container } from './DeleteCollection.style';
 import {
@@ -18,9 +18,9 @@ interface Props {
 const DeleteCollection = ({ name }: Props) => {
   const [overlay, setOverlay] = useState(false);
 
-  const { updateCollectionsInApi } = useApiRequest();
+  const { updateCollectionsInApi } = useRequest();
   const dispatch = useDispatch();
-  const collections = useSelector(collectionsSelector);
+  const collections = useSelector(getCollections);
 
   const updatedCollections = collections.filter(
     collection => collection.name !== name

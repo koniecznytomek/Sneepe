@@ -1,18 +1,59 @@
 import styled from 'styled-components';
-import { editor } from '../../../styles/forms';
-import { border, headerFont, regularFont } from '../../../styles/variables';
-import { inLineSnippet } from '../../../styles/snippets';
+import { buttons, editor } from '../../../styles/forms';
+import { border, font, mainText, scrollbar } from '../../../styles/variables';
+import { markdown, markdownform } from '../../../styles/markdown';
 
 export const Container = styled.div`
+  margin: 0 25px;
+
+  .note {
+    ${markdownform};
+
+    .note-title {
+      margin: 25px 0;
+    }
+
+    .note-options {
+      display: flex;
+      justify-content: flex-end;
+      height: 0;
+
+      span {
+        position: relative;
+        top: 25px;
+        right: 25px;
+        cursor: pointer;
+      }
+    }
+
+    .note-editor {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .note-viewer {
+      padding: 25px;
+      border: 1px solid ${border};
+      border-radius: 8px;
+      min-height: 100px;
+      ${markdown};
+    }
+  }
+
   .description {
-    padding: 25px;
+    margin: 25px 0;
 
     textarea {
+      ${font.medium};
+      font-size: 12px;
+      color: ${mainText};
       background: transparent;
       border: 1px solid ${border};
+      border-radius: 8px;
       width: 100%;
-      padding: 10px;
+      padding: 25px;
       resize: vertical;
+      ${scrollbar};
 
       &:focus {
         outline: 0;
@@ -23,51 +64,11 @@ export const Container = styled.div`
       }
     }
   }
-  ${editor};
 
-  .note {
-    padding: 25px;
-
-    h1 {
-      ${headerFont};
-      padding-bottom: 15px;
-    }
-
-    h2 {
-      ${headerFont};
-      font-size: 22px;
-      padding-bottom: 15px;
-    }
-
-    h3 {
-      ${headerFont};
-      font-size: 16px;
-      padding-bottom: 15px;
-    }
-
-    h4 {
-      ${headerFont};
-      font-size: 12px;
-      padding-bottom: 10px;
-    }
-
-    p {
-      ${regularFont};
-      padding-bottom: 30px;
-
-      code {
-        ${inLineSnippet};
-      }
-    }
-
-    pre {
-      border-radius: 6px;
-      font-size: 11px;
-      line-height: 20px;
-    }
-
-    img {
-      width: 100%;
-    }
+  .file {
+    margin: 25px 0;
+    ${editor};
   }
+
+  ${buttons};
 `;

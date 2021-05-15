@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addGists } from '../../slices/gists/gistsSlice';
+import { addGists } from '../slices/gists/gistsSlice';
 import { gql, useQuery } from '@apollo/client';
-import { addCollections } from '../../slices/collections/collectionsSlice';
+import { addCollections } from '../slices/collections/collectionsSlice';
 
-const FetchData = () => {
+const FetchAllGists = () => {
   const [all, setAll] = useState<any>();
   const [gists, setGists] = useState<any>([]);
 
@@ -31,7 +31,7 @@ const FetchData = () => {
     const counter = all && all.viewer.gists.totalCount;
 
     if (gists.length === counter) {
-      dispatch(addGists(gists)); // Set all fetched gists to redux state.
+      dispatch(addGists(gists));
 
       // Setup collections
       const config = gists.find((gist: any) =>
@@ -50,7 +50,7 @@ const FetchData = () => {
   return null;
 };
 
-export default FetchData;
+export default FetchAllGists;
 
 const ALL_GISTS = gql`
   query allGists($cursor: String) {

@@ -3,15 +3,15 @@ import { Container } from './AddCollection.style';
 import { IconFolder } from '../../../assets/icons/Icons';
 
 import { useDispatch, useSelector } from 'react-redux';
-import useApiRequest from '../../../hooks/useApiRequest';
-import { addCollection, collectionsSelector } from '../../../slices/collections/collectionsSlice';
+import useRequest from '../../../api/useRequest';
+import { addCollection, getCollections } from '../../../slices/collections/collectionsSlice';
 
 const AddCollection = () => {
   const [isAdding, setIsAdding] = useState(false);
-  const { updateCollectionsInApi } = useApiRequest();
+  const { updateCollectionsInApi } = useRequest();
 
   const dispatch = useDispatch();
-  const collections = useSelector(collectionsSelector);
+  const collections = useSelector(getCollections);
 
   const handleAddCollection = async (e: any) => {
     if (e.charCode === 13) {

@@ -11,12 +11,21 @@ import {
 export const titlebar = theme('theme', {
   light: css`
     background: ${color.snippetLight};
-  `,
-  dark: css`
-    background: ${color.snippetDark};
+    border-radius: 8px 8px 0 0;
+    border: 1px solid ${border};
+    border-bottom: 0;
   `,
   dusk: css`
+    background: ${color.snippetDark};
+    border-radius: 8px 8px 0 0;
+    border: 1px solid ${border};
+    border-bottom: 0;
+  `,
+  dark: css`
     background: ${color.snippetDusk};
+    border-radius: 8px 8px 0 0;
+    border: 1px solid ${border};
+    border-bottom: 0;
   `,
 });
 
@@ -25,21 +34,22 @@ export const inLineSnippet = theme('theme', {
     background: #fbfcfc;
     border: 1px solid ${border};
     border-radius: 4px;
-    padding: 1px 2px;
+    padding: 1px 4px;
+    ${font.code};
+    font-weight: bold;
+  `,
+  dusk: css`
+    background: ${secondaryBackground};
+    border: 1px solid ${border};
+    border-radius: 4px;
+    padding: 1px 4px;
     ${font.code};
   `,
   dark: css`
     background: ${secondaryBackground};
     border: 1px solid ${border};
     border-radius: 4px;
-    padding: 1px 2px;
-    ${font.code};
-  `,
-  dusk: css`
-    background: ${secondaryBackground};
-    border: 1px solid ${border};
-    border-radius: 4px;
-    padding: 1px 2px;
+    padding: 1px 4px;
     ${font.code};
   `,
 });
@@ -47,38 +57,19 @@ export const inLineSnippet = theme('theme', {
 export const snippet = theme('theme', {
   light: css`
     pre {
-      margin: 25px;
-      font-size: 11px;
-      line-height: 24px;
-      ${color.snippetLight};
-
-      ${scrollbar};
-      //background: #2A314C;
-      //border-radius: 4px;
-
-      code {
-        ${font.code};
-
-        .linenumber {
-          width: 40px;
-          opacity: 0.3;
-        }
-      }
-    }
-  `,
-  dark: css`
-    pre {
       margin: 0;
       font-size: 11px;
       line-height: 24px;
-      background: ${color.snippetDark};
+      background: ${color.snippetLight};
+      border-radius: 0 0 8px 8px;
+      border: 1px solid ${border};
       ${scrollbar};
 
       code {
         ${font.code};
-
         .linenumber {
           width: 40px;
+          opacity: 0.3;
         }
       }
     }
@@ -88,7 +79,28 @@ export const snippet = theme('theme', {
       margin: 0;
       font-size: 11px;
       line-height: 24px;
+      background: ${color.snippetDark};
+      border-radius: 0 0 8px 8px;
+      border: 1px solid ${border};
+      ${scrollbar};
+
+      code {
+        ${font.code};
+
+        .linenumber {
+          width: 40px;
+        }
+      }
+    }
+  `,
+  dark: css`
+    pre {
+      margin: 0;
+      font-size: 11px;
+      line-height: 24px;
       background: ${color.snippetDusk};
+      border-radius: 0 0 8px 8px;
+      border: 1px solid ${border};
       ${scrollbar};
 
       code {

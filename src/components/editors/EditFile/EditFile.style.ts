@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import { editor } from '../../../styles/forms';
+import { buttons, editor } from '../../../styles/forms';
 
 export const Container = styled.div`
-  .editfile {
-    ${editor};
-  }
+  padding: 25px;
+
+  ${editor};
+  ${buttons};
 `;

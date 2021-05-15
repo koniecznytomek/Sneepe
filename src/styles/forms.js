@@ -1,9 +1,9 @@
 import { css } from 'styled-components';
 import theme from 'styled-theming';
-import { color, font, mainText, scrollbar } from './variables';
+import { color, font, mainText, scrollbar, border } from './variables';
 import { titlebar } from './snippets';
 
-export const editbuttons = theme('theme', {
+export const button = theme('theme', {
   light: css`
     span.save {
       color: #567995;
@@ -11,35 +11,10 @@ export const editbuttons = theme('theme', {
       border: 1px solid #c5ddf0;
     }
 
-    span.delete {
-      color: #797d7f;
-      background: #fdedec;
-      border: 1px solid #fadbd8;
-    }
-
     span.cancel {
       color: #797d7f;
-      background: ${color.lightGrey};
+      background: #fbfbfb;
       border: 1px solid #f0f3f4;
-    }
-  `,
-  dark: css`
-    span.save {
-      color: #fff;
-      background: #5dade2;
-      border: 1px solid #5dade2;
-    }
-
-    span.delete {
-      color: #fff;
-      background: #313131;
-      border: 1px solid #313131;
-    }
-
-    span.cancel {
-      color: #fff;
-      background: #313131;
-      border: 1px solid #313131;
     }
   `,
   dusk: css`
@@ -49,28 +24,60 @@ export const editbuttons = theme('theme', {
       border: 1px solid #5dade2;
     }
 
-    span.delete {
+    span.cancel {
       color: #fff;
-      background: ${color.darkDusk};
-      border: 1px solid ${color.darkDusk};
+      background: ${color.lightDusk};
+      border: 1px solid ${border};
+    }
+  `,
+  dark: css`
+    span.save {
+      color: #fff;
+      background: #5dade2;
+      border: 1px solid #5dade2;
     }
 
     span.cancel {
       color: #fff;
-      background: ${color.darkDusk};
-      border: 1px solid ${color.darkDusk};
+      background: ${color.darkGraphite};
+      border: 1px solid ${border};
     }
   `,
 });
+
+export const buttons = css`
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin: 25px 0;
+
+    span {
+      display: block;
+      z-index: 10;
+      margin-left: 10px;
+      padding: 12px 20px;
+      border-radius: 2px;
+      cursor: pointer;
+
+      ${font.bold};
+      font-size: 6px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    ${button};
+  }
+`;
 
 export const snippetBg = theme('theme', {
   light: css`
     background: ${color.snippetLight};
   `,
-  dark: css`
+  dusk: css`
     background: ${color.snippetDark};
   `,
-  dusk: css`
+  dark: css`
     background: ${color.snippetDusk};
   `,
 });
@@ -85,6 +92,7 @@ export const editor = css`
     padding: 0 25px;
 
     .title {
+      width: 100%;
       input {
         font-family: 'SF-Bold', monospace;
         font-size: 10px;
@@ -94,9 +102,13 @@ export const editor = css`
         border: 0;
         padding: 0;
         margin: 0;
+        width: 100%;
         transform: translateY(-1px);
         &:focus {
           outline: none !important;
+        }
+        &.error {
+          color: orangered;
         }
       }
     }
@@ -133,7 +145,7 @@ export const editor = css`
         line-height: 24px;
         caret-color: ${mainText};
         resize: vertical;
-        
+
         &:focus {
           outline: 0;
         }
@@ -149,7 +161,8 @@ export const editor = css`
       grid-row: 1;
       grid-column: 1;
       ${font.code};
-
+      border: 1px solid ${border};
+      border-radius: 0 0 8px 8px;
       font-size: 11px;
       line-height: 24px;
 
@@ -160,27 +173,5 @@ export const editor = css`
         ${snippetBg};
       }
     }
-  }
-
-  .form-buttons {
-    display: flex;
-    justify-content: flex-end;
-    margin: 25px;
-
-    span {
-      display: block;
-      padding: 12px 20px;
-      border-radius: 2px;
-      margin-left: 10px;
-      cursor: pointer;
-      font-size: 6px;
-      ${font.bold};
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-      z-index: 10;
-    }
-
-    ${editbuttons};
   }
 `;

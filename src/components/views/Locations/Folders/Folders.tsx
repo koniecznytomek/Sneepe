@@ -7,13 +7,16 @@ import {
 } from '../../../../assets/icons/Icons';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { gistsSelector } from '../../../../slices/gists/gistsSlice';
+import { getGists } from '../../../../slices/gists/gistsSlice';
+import { getTrash } from '../../../../slices/trash/trashSlice';
 
 const Folders = () => {
-  const state = useSelector(gistsSelector);
+  const gists = useSelector(getGists);
+  const trash = useSelector(getTrash);
 
-  const gistsCounter = state.length;
-  const starredCounter = state.filter(item => item.viewerHasStarred).length;
+  const gistsCounter = gists.length;
+  const trashCounter = trash.length;
+  const starredCounter = gists.filter(item => item.viewerHasStarred).length;
 
   return (
     <Container>
@@ -36,7 +39,7 @@ const Folders = () => {
           <NavLink to='/gists/trash' activeClassName='active'>
             <IconTrash />
             <span className='name'>Trash</span>
-            <span className='counter'>10</span>
+            <span className='counter'>{trashCounter}</span>
           </NavLink>
         </li>
       </ul>

@@ -35,7 +35,7 @@ const gistsSlice = createSlice({
             ...gist,
             files: gist.files.map(file =>
               file.name === payload.filename
-                ? { ...file, text: payload.data.text }
+                ? { ...file, name: payload.data.name, text: payload.data.text }
                 : file
             ),
           };
@@ -47,13 +47,39 @@ const gistsSlice = createSlice({
       state,
       { payload }: PayloadAction<{ name: string; filename: string }>
     ) => {
-      const gist = state.gists.find(gist => gist.name === payload.name);
-      gist && gist.files.filter(file => file.name !== payload.filename);
+      state.gists = state.gists.map(gist => {
+        if (gist.name === payload.name) {
+          return {
+            ...gist,
+            files: gist.files.filter(file => file.name !== payload.filename),
+          };
+        }
+        return gist;
+      });
+    },
+
+    editNote: (
+      state,
+      { payload }: PayloadAction<File & { newFilename: string }>
+    ) => {
+      state.gists = state.gists.map(gist => {
+        if (gist.name === payload.name) {
+          return {
+            ...gist,
+            files: gist.files.map(file =>
+              file.name === payload.filename
+                ? { ...file, text: payload.text, name: payload.newFilename }
+                : file
+            ),
+          };
+        }
+        return gist;
+      });
     },
   },
 });
 
-export const gistsSelector = (state: RootState) => state.gistsState.gists;
+export const getGists = (state: RootState) => state.gistsState.gists;
 
 export const {
   addGists,
@@ -62,6 +88,7 @@ export const {
   addFile,
   updateFile,
   deleteFile,
+  editNote,
 } = gistsSlice.actions;
 
 export default gistsSlice.reducer;
