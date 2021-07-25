@@ -1,9 +1,9 @@
 import React from 'react';
 
 // components
-import Locations from '../Locations/Locations';
-import List from '../List/List';
-import Content from '../Content/Content';
+import Locations from '../../routes/Locations/Locations';
+import List from '../../routes/List/List';
+import Content from '../../routes/Content/Content';
 
 // redux
 import { useSelector } from 'react-redux';
@@ -12,7 +12,7 @@ import { RootState } from '../../../store/rootReducer';
 // styles
 import { ThemeProvider } from 'styled-components';
 import { Container } from './Root.style';
-import './../../../styles/global.scss';
+import '../../../styles/global.scss';
 
 const Root = () => {
     const theme = useSelector((state: RootState) => state.theme.mode);

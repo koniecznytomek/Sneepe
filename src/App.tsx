@@ -1,11 +1,19 @@
 import React from 'react';
-import { HashRouter } from 'react-router-dom';
-import Root from './components/routes/Root/Root';
-import FetchAllGists from './api/fetchAllGists';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { relayStylePagination } from '@apollo/client/utilities';
+
+// components
+import Root from './components/views/Root/Root';
+import FetchAllGists from './api/fetchAllGists';
+
+// router
+import { HashRouter } from 'react-router-dom';
+
+// redux
 import { useSelector } from 'react-redux';
 import { RootState } from './store/rootReducer';
+
+// types
 import { Url } from './types/enums';
 
 function App() {
