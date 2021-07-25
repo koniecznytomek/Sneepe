@@ -32,12 +32,11 @@ type Props = {
 
 const AddFile = ({ name, files, col }: Props) => {
     const [data, setData] = useState({ name: '', text: '\n' });
-    const [duplicate, setDuplicate] = useState(false);
+    const [duplicate, setDuplicate] = useState<boolean>(false);
 
     const { addFileToApi } = useRequest();
     const dispatch = useDispatch();
     const history = useHistory();
-
     const theme = useSelector(getTheme);
 
     useEffect(() => {
@@ -47,11 +46,7 @@ const AddFile = ({ name, files, col }: Props) => {
 
     const handleChange = (e: any) => {
         const { value, name } = e.target;
-        console.log(value);
-        setData({
-            ...data,
-            [name]: value,
-        });
+        setData({ ...data, [name]: value });
     };
 
     const handleSave = async () => {

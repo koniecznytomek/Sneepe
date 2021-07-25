@@ -23,9 +23,9 @@ import { IconColDelete, IconMdView } from '../../../assets/icons/Icons';
 import { Container } from './AddGist.style';
 
 const AddGist = () => {
+    const [mdView, setMdView] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(true);
     const [duplicates, setDuplicates] = useState<string[]>([]);
-    const [mdView, setMdView] = useState<boolean>(false);
 
     const [content, setContent] = useState({
         description: '',
@@ -66,7 +66,7 @@ const AddGist = () => {
         });
     };
     const handleNoteChange = (e: any) => {
-        const value = e.target.value;
+        const { value } = e.target;
 
         setContent({
             ...content,
@@ -76,22 +76,8 @@ const AddGist = () => {
 
     const handleFilesChange = (e: any, index: number) => {
         const { name, value } = e.target;
-
-        const newState = content.files.map((file, i) => {
-            if (i === index) {
-                return {
-                    ...file,
-                    [name]: value,
-                };
-            } else {
-                return file;
-            }
-        });
-
-        setContent({
-            ...content,
-            files: newState,
-        });
+        const newState = content.files.map((file, i) => (i === index ? { ...file, [name]: value } : file));
+        setContent({ ...content, files: newState });
     };
 
     const handleFileAdd = () => {
@@ -109,9 +95,7 @@ const AddGist = () => {
     };
 
     const handleDraft = () => {
-        const id = () => {
-            return '_' + Math.random().toString(36).substr(2, 9);
-        };
+        const id = () => '_' + Math.random().toString(36).substr(2, 9);
         console.log(id);
     };
 
