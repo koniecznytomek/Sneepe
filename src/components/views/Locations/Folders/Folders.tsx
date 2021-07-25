@@ -26,24 +26,24 @@ const Folders = () => {
         <Container>
             <ul>
                 <li>
-                    <NavLink to='/gists/allgists' activeClassName='active'>
+                    <NavLink to="/gists/allgists" activeClassName="active">
                         <IconGists />
-                        <span className='name'>Gists</span>
-                        <span className='counter'>{gistsCounter}</span>
+                        <span className="name">Gists</span>
+                        <span className="counter">{gistsCounter}</span>
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to='/gists/starred' activeClassName='active'>
+                    <NavLink to="/gists/starred" activeClassName="active">
                         <IconStarred />
-                        <span className='name'>Starred</span>
-                        <span className='counter'>{starredCounter}</span>
+                        <span className="name">Starred</span>
+                        <span className="counter">{starredCounter}</span>
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to='/gists/trash' activeClassName='active'>
+                    <NavLink to="/gists/trash" activeClassName="active">
                         <IconTrash />
-                        <span className='name'>Trash</span>
-                        <span className='counter'>{trashCounter}</span>
+                        <span className="name">Trash</span>
+                        <span className="counter">{trashCounter}</span>
                     </NavLink>
                 </li>
             </ul>

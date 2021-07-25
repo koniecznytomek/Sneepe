@@ -63,17 +63,17 @@ const EditCollection = ({ name }: any) => {
 
     return (
         <Container>
-            <div className='name'>
+            <div className="name">
                 {isEditing ? (
                     <>
-                        <div className='icon'>
+                        <div className="icon">
                             <IconFolder />
                         </div>
                         <form>
                             <input
-                                name='name'
+                                name="name"
                                 value={data}
-                                autoComplete='off'
+                                autoComplete="off"
                                 autoFocus
                                 onChange={e => handleChange(e)}
                                 onKeyPress={e => handleSave(e)}
@@ -81,13 +81,13 @@ const EditCollection = ({ name }: any) => {
                         </form>
                     </>
                 ) : (
-                    <div className='folder'>
+                    <div className="folder">
                         <IconFolder />
                         <span>{name}</span>
                     </div>
                 )}
             </div>
-            <div className='options'>
+            <div className="options">
                 {isEditing && <DeleteCollection name={name} />}
                 <span onClick={() => setIsEditing(!isEditing)}>
                     <IconColEdit />

@@ -16,10 +16,10 @@ const List = () => {
     return (
         <Container>
             <Switch>
-                <Route path='/gists/allgists' component={Gists} />
-                <Route path='/gists/starred' component={Starred} />
-                <Route path='/gists/trash' component={Trash} />
-                <Route path='/gists/:id' component={Collections} />
+                <Route path="/gists/allgists" component={Gists} />
+                <Route path="/gists/starred" component={Starred} />
+                <Route path="/gists/trash" component={Trash} />
+                <Route path="/gists/:id" component={Collections} />
             </Switch>
         </Container>
     );

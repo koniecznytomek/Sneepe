@@ -125,73 +125,73 @@ const AddGist = () => {
     return (
         <Container>
             <form>
-                <div className='note'>
-                    <div className='note-title'>
+                <div className="note">
+                    <div className="note-title">
                         <input
-                            name='title'
-                            placeholder='Gist name'
-                            autoComplete='off'
-                            spellCheck='false'
+                            name="title"
+                            placeholder="Gist name"
+                            autoComplete="off"
+                            spellCheck="false"
                             onChange={e => handleTitleChange(e)}
                         />
                     </div>
-                    <div className='note-options'>
+                    <div className="note-options">
                         <span onClick={() => setMdView(!mdView)}>
                             <IconMdView />
                         </span>
                     </div>
                     {!mdView ? (
-                        <div className='note-editor'>
+                        <div className="note-editor">
                             <textarea
-                                name='note'
+                                name="note"
                                 value={content.note.text}
-                                placeholder='Note'
-                                autoComplete='off'
-                                spellCheck='false'
+                                placeholder="Note"
+                                autoComplete="off"
+                                spellCheck="false"
                                 rows={10}
                                 onChange={e => handleNoteChange(e)}
                             />
                         </div>
                     ) : (
-                        <div className='note-viewer'>
+                        <div className="note-viewer">
                             <Markdown text={content.note.text} />
                         </div>
                     )}
                 </div>
-                <div className='description'>
+                <div className="description">
                     <textarea
-                        name='description'
-                        placeholder='Description'
-                        autoComplete='off'
-                        spellCheck='false'
+                        name="description"
+                        placeholder="Description"
+                        autoComplete="off"
+                        spellCheck="false"
                         rows={5}
                         onChange={e => handleContentChange(e)}
                     />
                 </div>
                 {content.files?.map((file, index) => (
-                    <div key={index} className='file'>
-                        <div className='title-bar'>
-                            <div className='title'>
+                    <div key={index} className="file">
+                        <div className="title-bar">
+                            <div className="title">
                                 <input
-                                    name='name'
-                                    placeholder='Filename'
-                                    autoComplete='off'
-                                    spellCheck='false'
+                                    name="name"
+                                    placeholder="Filename"
+                                    autoComplete="off"
+                                    spellCheck="false"
                                     value={file.name}
                                     className={duplicates.includes(file.name) ? 'error' : ''}
                                     onChange={e => handleFilesChange(e, index)}
                                 />
                             </div>
-                            <div className='options'>
+                            <div className="options">
                                 <span onClick={e => handleFileDelete(e, index)}>
                                     <IconColDelete />
                                 </span>
                             </div>
                         </div>
-                        <div className='snippet'>
-                            <div className='output'>
+                        <div className="snippet">
+                            <div className="output">
                                 <SyntaxHighlighter
-                                    language='javascript'
+                                    language="javascript"
                                     children={file.text}
                                     style={
                                         {
@@ -204,12 +204,12 @@ const AddGist = () => {
                                     lineNumberStyle={{ minWidth: '40px' }}
                                 />
                             </div>
-                            <div className='textarea'>
+                            <div className="textarea">
                                 <TextareaAutosize
-                                    name='text'
+                                    name="text"
                                     defaultValue={file.text}
-                                    autoComplete='off'
-                                    spellCheck='false'
+                                    autoComplete="off"
+                                    spellCheck="false"
                                     onChange={(e: any) => handleFilesChange(e, index)}
                                 />
                             </div>
@@ -217,19 +217,19 @@ const AddGist = () => {
                     </div>
                 ))}
             </form>
-            <div className='buttons'>
+            <div className="buttons">
                 {!error && (
-                    <span className='save' onClick={() => handleSave()}>
+                    <span className="save" onClick={() => handleSave()}>
                         save
                     </span>
                 )}
-                <span className='cancel' onClick={() => handleDraft()}>
+                <span className="cancel" onClick={() => handleDraft()}>
                     draft
                 </span>
-                <span className='cancel' onClick={() => handleFileAdd()}>
+                <span className="cancel" onClick={() => handleFileAdd()}>
                     add file
                 </span>
-                <span className='cancel' onClick={() => handleVisibility()}>
+                <span className="cancel" onClick={() => handleVisibility()}>
                     {content.isPublic ? 'Public' : 'Private'}
                 </span>
             </div>

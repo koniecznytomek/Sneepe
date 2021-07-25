@@ -10,10 +10,10 @@ const Search = ({ handle }: any) => {
     return (
         <Container>
             <form>
-                <span className='icon'>
+                <span className="icon">
                     <IconSearch />
                 </span>
-                <input name='search' autoComplete='off' onChange={e => handle(e.target.value)} />
+                <input name="search" autoComplete="off" onChange={e => handle(e.target.value)} />
             </form>
         </Container>
     );

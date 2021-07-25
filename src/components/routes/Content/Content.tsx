@@ -14,7 +14,7 @@ const Content = () => {
     return (
         <Container>
             <Switch>
-                <Route exact path='/gists' component={Gist} />
+                <Route exact path="/gists" component={Gist} />
                 <Route exact path={`/gists/:collection/addgist`} component={AddGist} />
                 <Route exact path={`/gists/:collection/:id`} component={Gist} />
                 <Route exact path={`/gists/:collection/:id/addfile`} component={Gist} />

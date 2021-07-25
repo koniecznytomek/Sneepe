@@ -58,14 +58,14 @@ const DeleteGist = () => {
                 <IconDeleteGist />
             </span>
             {overlay && (
-                <div className='overlay'>
-                    <div className='confirm-box'>
+                <div className="overlay">
+                    <div className="confirm-box">
                         <p>Are you sure to delete this Gist?</p>
-                        <div className='confirm-buttons'>
-                            <span className='confirm-button' onClick={() => handleDelete()}>
+                        <div className="confirm-buttons">
+                            <span className="confirm-button" onClick={() => handleDelete()}>
                                 <IconConfirm />
                             </span>
-                            <span className='confirm-button' onClick={() => setOverlay(false)}>
+                            <span className="confirm-button" onClick={() => setOverlay(false)}>
                                 <IconCancel />
                             </span>
                         </div>

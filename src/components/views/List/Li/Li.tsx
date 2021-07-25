@@ -28,8 +28,8 @@ const Li = ({ slug, gist, collection }: Props) => {
                 <NavLink
                     replace
                     to={`${slug}/${gist.name}`}
-                    activeClassName='active'
-                    draggable='true'
+                    activeClassName="active"
+                    draggable="true"
                     onDragStart={() =>
                         dispatch(
                             setDragged({
@@ -40,25 +40,25 @@ const Li = ({ slug, gist, collection }: Props) => {
                     }
                     onDragEnd={() => dispatch(setDragged({ name: '', currentCollection: '' }))}
                 >
-                    <span className='title'>{title}</span>
-                    <span className='date'>{gist.updatedAt ? gist.updatedAt.substring(0, 10) : ''}</span>
-                    <span className='desc'>{gist.description}</span>
+                    <span className="title">{title}</span>
+                    <span className="date">{gist.updatedAt ? gist.updatedAt.substring(0, 10) : ''}</span>
+                    <span className="desc">{gist.description}</span>
                     {lang &&
                         lang.map(
                             (extension, i) =>
                                 extension && (
-                                    <span className='lang' key={i}>
+                                    <span className="lang" key={i}>
                                         {extension}
                                     </span>
                                 )
                         )}
                     {!gist.isPublic && (
-                        <span className='public'>
+                        <span className="public">
                             <IconLock />
                         </span>
                     )}
                     {collection && (
-                        <span className='delete'>
+                        <span className="delete">
                             <DeleteFromCollection name={gist.name} collection={collection.name} />
                         </span>
                     )}

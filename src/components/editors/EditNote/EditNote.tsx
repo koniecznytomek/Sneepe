@@ -70,18 +70,18 @@ const EditNote = ({ name, note, col, files }: Props) => {
     return (
         <Container>
             <form>
-                <div className='note'>
-                    <div className='note-title'>
+                <div className="note">
+                    <div className="note-title">
                         <input
-                            name='name'
+                            name="name"
                             autoFocus
-                            autoComplete='off'
-                            spellCheck='false'
+                            autoComplete="off"
+                            spellCheck="false"
                             defaultValue={data.name}
                             onChange={e => handleChange(e)}
                         />
                     </div>
-                    <div className='note-options'>
+                    <div className="note-options">
                         <span>
                             <span onClick={() => setMdView(!mdView)}>
                                 <IconMdView />
@@ -89,23 +89,23 @@ const EditNote = ({ name, note, col, files }: Props) => {
                         </span>
                     </div>
                     {!mdView ? (
-                        <div className='note-editor'>
-                            <textarea name='text' defaultValue={data.text} rows={30} onChange={e => handleChange(e)} />
+                        <div className="note-editor">
+                            <textarea name="text" defaultValue={data.text} rows={30} onChange={e => handleChange(e)} />
                         </div>
                     ) : (
-                        <div className='note-viewer'>
+                        <div className="note-viewer">
                             <Markdown text={data.text} />
                         </div>
                     )}
                 </div>
             </form>
 
-            <div className='buttons'>
-                <span className='save' onClick={e => handleSave(e)}>
+            <div className="buttons">
+                <span className="save" onClick={e => handleSave(e)}>
                     save
                 </span>
                 <DeleteFile name={name} filename={note.name} files={files} />
-                <span className='cancel' onClick={() => handleCancel()}>
+                <span className="cancel" onClick={() => handleCancel()}>
                     cancel
                 </span>
             </div>

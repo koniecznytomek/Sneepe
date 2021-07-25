@@ -21,7 +21,7 @@ const BarTop = ({ hasNote }: Props) => {
 
     return (
         <Container>
-            <div className='bar'>
+            <div className="bar">
                 <ul>
                     <li>
                         <NavLink to={`/gists/${collection}/${id}/addfile`} replace>

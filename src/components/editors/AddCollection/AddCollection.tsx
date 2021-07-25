@@ -31,22 +31,22 @@ const AddCollection = () => {
 
     return (
         <Container>
-            <div className='add'>
-                <div className='form'>
+            <div className="add">
+                <div className="form">
                     {isAdding && (
-                        <span className='new'>
+                        <span className="new">
                             <IconFolder />
                             <form>
                                 <input
                                     autoFocus
-                                    placeholder='Unnamed'
+                                    placeholder="Unnamed"
                                     onKeyPress={event => handleAddCollection(event)}
                                 />
                             </form>
                         </span>
                     )}
                 </div>
-                <div className='button'>
+                <div className="button">
                     <span onClick={() => setIsAdding(!isAdding)} className={`${isAdding ? 'adding' : 'default'}`}>
                         +
                     </span>

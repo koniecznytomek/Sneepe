@@ -41,7 +41,7 @@ const Gists = () => {
                         )
                         .map((gist, i) => <Li key={i} gist={gist} slug={match.path} />)}
             </ul>
-            <Route exact path='/gists/allgists/'>
+            <Route exact path="/gists/allgists/">
                 <Redirect to={`${match.path}/${gists[0] && gists[0].name}`} />
             </Route>
         </Container>

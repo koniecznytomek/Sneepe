@@ -47,7 +47,7 @@ const Collections = () => {
                     <Li key={i} gist={gist} slug={match.url} collection={collection} />
                 ))}
                 {!result.length && (
-                    <li className='nofound'>
+                    <li className="nofound">
                         <p>No gists found.</p>
                     </li>
                 )}

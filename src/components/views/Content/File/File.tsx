@@ -28,22 +28,22 @@ const File = ({ files, file, name }: Props) => {
     return (
         <Container>
             <div className={`file ${isEditing ? 'hidden' : ''}`}>
-                <div className='title-bar'>
-                    <div className='title'>
+                <div className="title-bar">
+                    <div className="title">
                         <p>{file.name}</p>
                     </div>
-                    <div className='options'>
-                        <span className='editicon' onClick={() => setIsEditing(true)}>
+                    <div className="options">
+                        <span className="editicon" onClick={() => setIsEditing(true)}>
                             <IconColEdit />
                         </span>
                     </div>
                 </div>
-                <div className='snippet'>
+                <div className="snippet">
                     <Snippet text={file.text} language={file.language} />
                 </div>
             </div>
             {isEditing && (
-                <div className='file-edit'>
+                <div className="file-edit">
                     <EditFile name={name} file={file} files={files} trigger={(state: boolean) => setIsEditing(state)} />
                 </div>
             )}

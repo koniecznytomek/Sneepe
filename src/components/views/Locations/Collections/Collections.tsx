@@ -72,10 +72,10 @@ const Collections = () => {
             <ul>
                 {collections?.map((col, i) => (
                     <li key={i} onDrop={() => handleOnDrop(col.name, dragged)} onDragOver={e => handleOnDrag(e)}>
-                        <NavLink to={`/gists/${col.name}`} activeClassName='active'>
+                        <NavLink to={`/gists/${col.name}`} activeClassName="active">
                             <IconFolder />
-                            <span className='name'>{col.name}</span>
-                            <span className='counter'>{counter(col.name)}</span>
+                            <span className="name">{col.name}</span>
+                            <span className="counter">{counter(col.name)}</span>
                         </NavLink>
                     </li>
                 ))}

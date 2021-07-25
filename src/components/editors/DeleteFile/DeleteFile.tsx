@@ -73,23 +73,23 @@ const DeleteFile = ({ name, filename, files }: Props) => {
 
     return (
         <Container>
-            <span className='cancel' onClick={() => setOverlay(true)}>
+            <span className="cancel" onClick={() => setOverlay(true)}>
                 Delete
             </span>
             {overlay && (
-                <div className='overlay'>
-                    <div className='confirm-box'>
+                <div className="overlay">
+                    <div className="confirm-box">
                         {counter > 1 ? (
                             <p>Are you sure to delete this File?</p>
                         ) : (
                             <p>Are you sure to delete this Gist?</p>
                         )}
                         ;
-                        <div className='confirm-buttons'>
-                            <span className='confirm-button' onClick={() => handleDelete()}>
+                        <div className="confirm-buttons">
+                            <span className="confirm-button" onClick={() => handleDelete()}>
                                 <IconConfirm />
                             </span>
-                            <span className='confirm-button' onClick={() => setOverlay(false)}>
+                            <span className="confirm-button" onClick={() => setOverlay(false)}>
                                 <IconCancel />
                             </span>
                         </div>

@@ -12,7 +12,7 @@ type Props = {
 const Note = ({ text }: Props) => {
     return (
         <Container>
-            <div className='note'>
+            <div className="note">
                 <Markdown text={text} />
             </div>
         </Container>

@@ -80,22 +80,22 @@ const EditFile = ({ name, file, files, trigger }: Props) => {
     return (
         <Container>
             <form>
-                <div className='title-bar'>
-                    <div className='title'>
+                <div className="title-bar">
+                    <div className="title">
                         <input
-                            name='name'
+                            name="name"
                             autoFocus
-                            autoComplete='off'
-                            spellCheck='false'
+                            autoComplete="off"
+                            spellCheck="false"
                             defaultValue={data.name}
                             onChange={e => handleChange(e)}
                             className={`${titleExists ? 'error' : 'default'}`}
                         />
                     </div>
-                    <div className='options'></div>
+                    <div className="options"></div>
                 </div>
-                <div className='snippet'>
-                    <div className='output'>
+                <div className="snippet">
+                    <div className="output">
                         <SyntaxHighlighter
                             language={file.language && file.language.name.toLowerCase()}
                             children={data.text}
@@ -110,23 +110,23 @@ const EditFile = ({ name, file, files, trigger }: Props) => {
                             lineNumberStyle={{ minWidth: '40px' }}
                         />
                     </div>
-                    <div className='textarea'>
+                    <div className="textarea">
                         <TextareaAutosize
-                            name='text'
+                            name="text"
                             defaultValue={data.text}
-                            spellCheck='false'
+                            spellCheck="false"
                             onChange={e => handleChange(e)}
                         />
                     </div>
                 </div>
             </form>
             {data.name.length > 0 && (
-                <div className='buttons'>
-                    <span className='save' onClick={e => handleSave(e)}>
+                <div className="buttons">
+                    <span className="save" onClick={e => handleSave(e)}>
                         {!titleExists && 'save'}
                     </span>
                     <DeleteFile name={name} filename={filename} files={files} />
-                    <span className='cancel' onClick={() => handleCancel()}>
+                    <span className="cancel" onClick={() => handleCancel()}>
                         cancel
                     </span>
                 </div>
