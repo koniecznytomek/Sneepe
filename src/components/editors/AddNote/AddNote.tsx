@@ -3,9 +3,11 @@ import React, { useState } from 'react';
 // components
 import Markdown from '../../features/Markdown/Markdown';
 
+// hooks
+import useRequest from '../../../api/useRequest';
+
 // redux
 import { useDispatch } from 'react-redux';
-import useRequest from '../../../api/useRequest';
 import { addFile } from '../../../slices/gists/gistsSlice';
 
 // router

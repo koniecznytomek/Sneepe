@@ -5,10 +5,12 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import TextareaAutosize from 'react-autosize-textarea';
 import Markdown from '../../features/Markdown/Markdown';
 
+// hooks
+import useRequest from '../../../api/useRequest';
+
 // redux
 import { useSelector } from 'react-redux';
 import { getTheme } from '../../../slices/theme/themeSlice';
-import useRequest from '../../../api/useRequest';
 
 // router
 import { useParams } from 'react-router-dom';
@@ -77,8 +79,7 @@ const AddGist = () => {
     };
 
     const handleFilesChange = (e: any, index: number) => {
-        const key = e.target.name;
-        const value = e.target.value;
+        const { key, value } = e.target;
 
         const newState = content.files.map((file, i) => {
             if (i === index) {

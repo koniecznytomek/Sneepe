@@ -49,7 +49,7 @@ const Gist = () => {
                 <EditNote name={id} note={note} col={collection} files={gist.files} />
             </Route>
             <Route exact path={`/gists/${collection}/${id}/editdescription`}>
-                <EditDescription name={id} />
+                <EditDescription name={id} description={gist.description} />
             </Route>
             {note && !location.pathname.includes('editnote') && <Note {...note} />}
             {gist.files

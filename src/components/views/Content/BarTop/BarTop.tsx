@@ -28,6 +28,11 @@ const BarTop = ({ hasNote }: Props) => {
                             <IconAddFile />
                         </NavLink>
                     </li>
+                    <li>
+                        <NavLink to={`/gists/${collection}/${id}/editdescription`} replace>
+                            <IconAddFile />
+                        </NavLink>
+                    </li>
                     {hasNote ? (
                         <li>
                             <NavLink to={`/gists/${collection}/${id}/editnote`} replace>
