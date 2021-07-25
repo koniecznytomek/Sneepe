@@ -53,12 +53,8 @@ const AddGist = () => {
     };
 
     const handleContentChange = (e: any) => {
-        const value = e.target.value;
-
-        setContent({
-            ...content,
-            [e.target.name]: value,
-        });
+        const { name, value } = e.target;
+        setContent({ ...content, [name]: value });
     };
 
     const handleTitleChange = (e: any) => {
@@ -79,13 +75,13 @@ const AddGist = () => {
     };
 
     const handleFilesChange = (e: any, index: number) => {
-        const { key, value } = e.target;
+        const { name, value } = e.target;
 
         const newState = content.files.map((file, i) => {
             if (i === index) {
                 return {
                     ...file,
-                    [key]: value,
+                    [name]: value,
                 };
             } else {
                 return file;
@@ -133,7 +129,7 @@ const AddGist = () => {
                             placeholder="Gist name"
                             autoComplete="off"
                             spellCheck="false"
-                            onChange={e => handleTitleChange(e)}
+                            onChange={handleTitleChange}
                         />
                     </div>
                     <div className="note-options">
@@ -150,7 +146,7 @@ const AddGist = () => {
                                 autoComplete="off"
                                 spellCheck="false"
                                 rows={10}
-                                onChange={e => handleNoteChange(e)}
+                                onChange={handleNoteChange}
                             />
                         </div>
                     ) : (
@@ -166,7 +162,7 @@ const AddGist = () => {
                         autoComplete="off"
                         spellCheck="false"
                         rows={5}
-                        onChange={e => handleContentChange(e)}
+                        onChange={handleContentChange}
                     />
                 </div>
                 {content.files?.map((file, index) => (
@@ -220,17 +216,17 @@ const AddGist = () => {
             </form>
             <div className="buttons">
                 {!error && (
-                    <span className="save" onClick={() => handleSave()}>
+                    <span className="save" onClick={handleSave}>
                         save
                     </span>
                 )}
-                <span className="cancel" onClick={() => handleDraft()}>
+                <span className="cancel" onClick={handleDraft}>
                     draft
                 </span>
-                <span className="cancel" onClick={() => handleFileAdd()}>
+                <span className="cancel" onClick={handleFileAdd}>
                     add file
                 </span>
-                <span className="cancel" onClick={() => handleVisibility()}>
+                <span className="cancel" onClick={handleVisibility}>
                     {content.isPublic ? 'Public' : 'Private'}
                 </span>
             </div>

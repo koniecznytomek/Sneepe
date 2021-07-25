@@ -46,10 +46,11 @@ const AddFile = ({ name, files, col }: Props) => {
     }, [files, data.name]);
 
     const handleChange = (e: any) => {
-        const value = e.target.value;
+        const { value, name } = e.target;
+        console.log(value);
         setData({
             ...data,
-            [e.target.name]: value,
+            [name]: value,
         });
     };
 
@@ -74,11 +75,11 @@ const AddFile = ({ name, files, col }: Props) => {
                             autoComplete="off"
                             spellCheck="false"
                             defaultValue={data.name}
-                            onChange={e => handleChange(e)}
+                            onChange={handleChange}
                             className={`${duplicate ? 'error' : 'default'}`}
                         />
                     </div>
-                    <div className="options"></div>
+                    <div className="options" />
                 </div>
                 <div className="snippet">
                     <div className="output">
@@ -101,18 +102,18 @@ const AddFile = ({ name, files, col }: Props) => {
                             name="text"
                             defaultValue={data.text}
                             spellCheck="false"
-                            onChange={e => handleChange(e)}
+                            onChange={handleChange}
                         />
                     </div>
                 </div>
             </form>
             <div className="buttons">
                 {!duplicate && data.name.length > 0 && (
-                    <span className="save" onClick={() => handleSave()}>
+                    <span className="save" onClick={handleSave}>
                         save
                     </span>
                 )}
-                <span className="cancel" onClick={() => handleCancel()}>
+                <span className="cancel" onClick={handleCancel}>
                     cancel
                 </span>
             </div>
