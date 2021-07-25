@@ -79,12 +79,7 @@ const DeleteFile = ({ name, filename, files }: Props) => {
             {overlay && (
                 <div className="overlay">
                     <div className="confirm-box">
-                        {counter > 1 ? (
-                            <p>Are you sure to delete this File?</p>
-                        ) : (
-                            <p>Are you sure to delete this Gist?</p>
-                        )}
-                        ;
+                        <p>Are you sure to delete this {counter > 1 ? 'File' : 'Gist'}?</p>;
                         <div className="confirm-buttons">
                             <span className="confirm-button" onClick={handleDelete}>
                                 <IconConfirm />
