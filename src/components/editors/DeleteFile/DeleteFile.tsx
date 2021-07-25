@@ -22,7 +22,7 @@ type Props = {
 };
 
 const DeleteFile = ({ name, filename, files }: Props) => {
-    const [overlay, setOverlay] = useState(false);
+    const [overlay, setOverlay] = useState<boolean>(false);
 
     const { deleteFileFromApi, deleteGistFromApi, updateCollectionsInApi } = useRequest();
 
@@ -86,7 +86,7 @@ const DeleteFile = ({ name, filename, files }: Props) => {
                         )}
                         ;
                         <div className="confirm-buttons">
-                            <span className="confirm-button" onClick={() => handleDelete()}>
+                            <span className="confirm-button" onClick={handleDelete}>
                                 <IconConfirm />
                             </span>
                             <span className="confirm-button" onClick={() => setOverlay(false)}>

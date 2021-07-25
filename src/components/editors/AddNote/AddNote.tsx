@@ -32,7 +32,8 @@ const AddNote = ({ name, col }: Props) => {
     const { addFileToApi } = useRequest();
 
     const handleChange = (e: any) => {
-        setData({ ...data, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        setData({ ...data, [name]: value });
     };
 
     const handleSave = async () => {
@@ -57,7 +58,7 @@ const AddNote = ({ name, col }: Props) => {
                             autoComplete="off"
                             spellCheck="false"
                             defaultValue={data.name}
-                            onChange={e => handleChange(e)}
+                            onChange={handleChange}
                         />
                     </div>
                     <div className="note-options">
@@ -69,7 +70,7 @@ const AddNote = ({ name, col }: Props) => {
                     </div>
                     {!mdView ? (
                         <div className="note-editor">
-                            <textarea name="text" defaultValue={data.text} rows={30} onChange={e => handleChange(e)} />
+                            <textarea name="text" defaultValue={data.text} rows={30} onChange={handleChange} />
                         </div>
                     ) : (
                         <div className="note-viewer">
@@ -79,10 +80,10 @@ const AddNote = ({ name, col }: Props) => {
                 </div>
             </form>
             <div className="buttons">
-                <span className="save" onClick={() => handleSave()}>
+                <span className="save" onClick={handleSave}>
                     save
                 </span>
-                <span className="cancel" onClick={() => handleCancel()}>
+                <span className="cancel" onClick={handleCancel}>
                     cancel
                 </span>
             </div>

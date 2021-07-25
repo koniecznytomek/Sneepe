@@ -57,7 +57,7 @@ const DeleteFromCollection = ({ name, collection }: Props) => {
                     <div className="confirm-box">
                         <p>Are you sure to delete this Gist from ... ?</p>
                         <div className="confirm-buttons">
-                            <span className="confirm-button" onClick={() => handleDelete()}>
+                            <span className="confirm-button" onClick={handleDelete}>
                                 <IconConfirm />
                             </span>
                             <span className="confirm-button" onClick={() => setOverlay(false)}>

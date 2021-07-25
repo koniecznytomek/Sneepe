@@ -88,7 +88,7 @@ const EditFile = ({ name, file, files, trigger }: Props) => {
                             autoComplete="off"
                             spellCheck="false"
                             defaultValue={data.name}
-                            onChange={e => handleChange(e)}
+                            onChange={handleChange}
                             className={`${titleExists ? 'error' : 'default'}`}
                         />
                     </div>
@@ -115,18 +115,18 @@ const EditFile = ({ name, file, files, trigger }: Props) => {
                             name="text"
                             defaultValue={data.text}
                             spellCheck="false"
-                            onChange={e => handleChange(e)}
+                            onChange={handleChange}
                         />
                     </div>
                 </div>
             </form>
             {data.name.length > 0 && (
                 <div className="buttons">
-                    <span className="save" onClick={e => handleSave(e)}>
+                    <span className="save" onClick={handleSave}>
                         {!titleExists && 'save'}
                     </span>
                     <DeleteFile name={name} filename={filename} files={files} />
-                    <span className="cancel" onClick={() => handleCancel()}>
+                    <span className="cancel" onClick={handleCancel}>
                         cancel
                     </span>
                 </div>

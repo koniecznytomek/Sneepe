@@ -78,7 +78,7 @@ const EditNote = ({ name, note, col, files }: Props) => {
                             autoComplete="off"
                             spellCheck="false"
                             defaultValue={data.name}
-                            onChange={e => handleChange(e)}
+                            onChange={handleChange}
                         />
                     </div>
                     <div className="note-options">
@@ -90,7 +90,7 @@ const EditNote = ({ name, note, col, files }: Props) => {
                     </div>
                     {!mdView ? (
                         <div className="note-editor">
-                            <textarea name="text" defaultValue={data.text} rows={30} onChange={e => handleChange(e)} />
+                            <textarea name="text" defaultValue={data.text} rows={30} onChange={handleChange} />
                         </div>
                     ) : (
                         <div className="note-viewer">
@@ -101,11 +101,11 @@ const EditNote = ({ name, note, col, files }: Props) => {
             </form>
 
             <div className="buttons">
-                <span className="save" onClick={e => handleSave(e)}>
+                <span className="save" onClick={handleSave}>
                     save
                 </span>
                 <DeleteFile name={name} filename={note.name} files={files} />
-                <span className="cancel" onClick={() => handleCancel()}>
+                <span className="cancel" onClick={handleCancel}>
                     cancel
                 </span>
             </div>

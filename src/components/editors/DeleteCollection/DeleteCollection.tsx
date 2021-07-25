@@ -16,7 +16,7 @@ type Props = {
 };
 
 const DeleteCollection = ({ name }: Props) => {
-    const [overlay, setOverlay] = useState(false);
+    const [overlay, setOverlay] = useState<boolean>(false);
 
     const { updateCollectionsInApi } = useRequest();
     const dispatch = useDispatch();
@@ -40,7 +40,7 @@ const DeleteCollection = ({ name }: Props) => {
                     <div className="confirm-box">
                         <p>Are you sure to delete {name} collection?</p>
                         <div className="confirm-buttons">
-                            <span className="confirm-button" onClick={() => handleDelete()}>
+                            <span className="confirm-button" onClick={handleDelete}>
                                 <IconConfirm />
                             </span>
                             <span className="confirm-button" onClick={() => setOverlay(false)}>

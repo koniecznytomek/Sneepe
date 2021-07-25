@@ -20,8 +20,8 @@ import { IconColEdit, IconFolder } from '../../../assets/icons/Icons';
 import { Container } from './EditCollection.style';
 
 const EditCollection = ({ name }: any) => {
-    const [isEditing, setIsEditing] = useState(false);
-    const [data, setData] = useState(name);
+    const [isEditing, setIsEditing] = useState<boolean>(false);
+    const [data, setData] = useState<string>(name);
 
     const { updateCollectionsInApi } = useRequest();
     const history = useHistory();
@@ -75,8 +75,8 @@ const EditCollection = ({ name }: any) => {
                                 value={data}
                                 autoComplete="off"
                                 autoFocus
-                                onChange={e => handleChange(e)}
-                                onKeyPress={e => handleSave(e)}
+                                onChange={handleChange}
+                                onKeyPress={handleSave}
                             />
                         </form>
                     </>
