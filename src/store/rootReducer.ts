@@ -7,14 +7,13 @@ import gistsReducer from '../slices/gists/gistsSlice';
 import themeReducer from '../slices/theme/themeSlice';
 import trashReducer from '../slices/trash/trashSlice';
 
-
 const rootReducer = combineReducers({
-  auth: authReducer,
-  collectionsState: collectionsReducer,
-  gist: gistReducer,
-  gistsState: gistsReducer,
-  theme: themeReducer,
-  stateTrash: trashReducer,
+    auth: authReducer,
+    collectionsState: collectionsReducer,
+    gist: gistReducer,
+    gistsState: gistsReducer,
+    theme: themeReducer,
+    stateTrash: trashReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

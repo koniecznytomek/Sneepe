@@ -1,92 +1,100 @@
 import React, { useEffect, useState } from 'react';
 
+// components
+import DeleteCollection from '../DeleteCollection/DeleteCollection';
+
+// hooks
+import useRequest from '../../../api/useRequest';
+
+// router
 import { useHistory } from 'react-router-dom';
 
-import useRequest from '../../../api/useRequest';
+// redux
 import { useDispatch, useSelector } from 'react-redux';
 import { getCollections, renameCollection } from '../../../slices/collections/collectionsSlice';
 
-import DeleteCollection from '../DeleteCollection/DeleteCollection';
-
-import { Container } from './EditCollection.style';
+// assets
 import { IconColEdit, IconFolder } from '../../../assets/icons/Icons';
 
+// styles
+import { Container } from './EditCollection.style';
+
 const EditCollection = ({ name }: any) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [data, setData] = useState(name);
+    const [isEditing, setIsEditing] = useState(false);
+    const [data, setData] = useState(name);
 
-  const { updateCollectionsInApi } = useRequest();
-  const history = useHistory();
+    const { updateCollectionsInApi } = useRequest();
+    const history = useHistory();
 
-  const dispatch = useDispatch();
-  const collections = useSelector(getCollections);
+    const dispatch = useDispatch();
+    const collections = useSelector(getCollections);
 
-  useEffect(() => {
-    setData(name);
-  }, [name]);
+    useEffect(() => {
+        setData(name);
+    }, [name]);
 
-  const handleChange = (e: any) => {
-    e.preventDefault();
-    setData(e.target.value);
-  };
+    const handleChange = (e: any) => {
+        e.preventDefault();
+        setData(e.target.value);
+    };
 
-  const handleSave = async (e: any) => {
-    if (e.charCode === 13) {
-      e.preventDefault();
-      setIsEditing(false);
-      history.push(`/gists/${data}`);
+    const handleSave = async (e: any) => {
+        if (e.charCode === 13) {
+            e.preventDefault();
+            setIsEditing(false);
+            history.push(`/gists/${data}`);
 
-      dispatch(renameCollection({ name: name, newName: data }));
+            dispatch(renameCollection({ name: name, newName: data }));
 
-      const renamedCollection = collections.map(collection => {
-        if (collection.name === name) {
-          return {
-            name: data,
-            gists: [...collection.gists],
-          };
-        } else {
-          return collection;
+            const renamedCollection = collections.map(collection => {
+                if (collection.name === name) {
+                    return {
+                        name: data,
+                        gists: [...collection.gists],
+                    };
+                } else {
+                    return collection;
+                }
+            });
+
+            await updateCollectionsInApi(renamedCollection);
         }
-      });
+    };
 
-      await updateCollectionsInApi(renamedCollection);
-    }
-  };
-
-  return (
-    <Container>
-      <div className='name'>
-        {isEditing ? (
-          <>
-            <div className='icon'>
-              <IconFolder />
+    return (
+        <Container>
+            <div className='name'>
+                {isEditing ? (
+                    <>
+                        <div className='icon'>
+                            <IconFolder />
+                        </div>
+                        <form>
+                            <input
+                                name='name'
+                                value={data}
+                                autoComplete='off'
+                                autoFocus
+                                onChange={e => handleChange(e)}
+                                onKeyPress={e => handleSave(e)}
+                            />
+                        </form>
+                    </>
+                ) : (
+                    <div className='folder'>
+                        <IconFolder />
+                        <span>{name}</span>
+                    </div>
+                )}
             </div>
-            <form>
-              <input
-                name='name'
-                value={data}
-                autoComplete='off'
-                autoFocus
-                onChange={e => handleChange(e)}
-                onKeyPress={e => handleSave(e)}
-              />
-            </form>
-          </>
-        ) : (
-          <div className='folder'>
-            <IconFolder />
-            <span>{name}</span>
-          </div>
-        )}
-      </div>
-      <div className='options'>
-        {isEditing && <DeleteCollection name={name} />}
-        <span onClick={() => setIsEditing(!isEditing)}>
-          <IconColEdit />
-        </span>
-      </div>
-    </Container>
-  );
+            <div className='options'>
+                {isEditing && <DeleteCollection name={name} />}
+                <span onClick={() => setIsEditing(!isEditing)}>
+                    <IconColEdit />
+                </span>
+            </div>
+        </Container>
+    );
 };
 
 export default EditCollection;

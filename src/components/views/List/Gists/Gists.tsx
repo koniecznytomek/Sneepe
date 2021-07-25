@@ -1,51 +1,51 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Route, Redirect, useRouteMatch } from 'react-router';
-import { useSelector } from 'react-redux';
-import { getGists } from '../../../../slices/gists/gistsSlice';
 
-import { Container } from './Gists.style';
+// components
 import Li from '../Li/Li';
 import BarTop from '../BarTop/BarTop';
 
-export interface MatchParams {
-  id: string;
-}
+// router
+import { Route, Redirect, useRouteMatch } from 'react-router';
+
+// redux
+import { useSelector } from 'react-redux';
+import { getGists } from '../../../../slices/gists/gistsSlice';
+
+// styles
+import { Container } from './Gists.style';
 
 const Gists = () => {
-  const [search, setSearch] = useState('');
+    const [search, setSearch] = useState('');
 
-  const gists = useSelector(getGists);
-  const container = useRef<HTMLDivElement>(null);
-  const match = useRouteMatch<MatchParams>();
+    const gists = useSelector(getGists);
+    const container = useRef<HTMLDivElement>(null);
+    const match = useRouteMatch<{ id: string }>();
 
-  useEffect(() => {
-    container.current &&
-      container.current.scrollIntoView({
-        block: 'start',
-      });
-  }, [match.params.id]);
+    useEffect(() => {
+        container.current &&
+            container.current.scrollIntoView({
+                block: 'start',
+            });
+    }, [match.params.id]);
 
-  return (
-    <Container ref={container}>
-      <BarTop
-        add={'allgists'}
-        setSearch={(phrase: string) => setSearch(phrase)}
-      />
-      <ul>
-        {gists &&
-          gists
-            .filter(
-              gist =>
-                gist.files[0].name.toLowerCase().includes(search) ||
-                gist.description.toLowerCase().includes(search)
-            )
-            .map((gist, i) => <Li key={i} gist={gist} slug={match.path} />)}
-      </ul>
-      <Route exact path='/gists/allgists/'>
-        <Redirect to={`${match.path}/${gists[0] && gists[0].name}`} />
-      </Route>
-    </Container>
-  );
+    return (
+        <Container ref={container}>
+            <BarTop add={'allgists'} setSearch={(phrase: string) => setSearch(phrase)} />
+            <ul>
+                {gists &&
+                    gists
+                        .filter(
+                            gist =>
+                                gist.files[0].name.toLowerCase().includes(search) ||
+                                gist.description.toLowerCase().includes(search)
+                        )
+                        .map((gist, i) => <Li key={i} gist={gist} slug={match.path} />)}
+            </ul>
+            <Route exact path='/gists/allgists/'>
+                <Redirect to={`${match.path}/${gists[0] && gists[0].name}`} />
+            </Route>
+        </Container>
+    );
 };
 
 export default Gists;

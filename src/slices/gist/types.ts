@@ -1,4 +1,4 @@
 export interface Gist {
-  name: string;
-  currentCollection: string;
+    readonly name: string;
+    readonly currentCollection: string;
 }

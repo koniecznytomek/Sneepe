@@ -1,13 +1,13 @@
 export interface CollectionsState {
-  collections: Collections[];
+    readonly collections: Collections[];
 }
 
 export interface Collections {
-  name: string;
-  gists: string[];
+    readonly name: string;
+    readonly gists: string[];
 }
 
 export interface Collection {
-  name: string;
-  gist: string;
+    readonly name: string;
+    readonly gist: string;
 }

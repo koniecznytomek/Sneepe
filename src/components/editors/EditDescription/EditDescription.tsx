@@ -1,16 +1,14 @@
 import React from 'react';
+
+// styles
 import { Container } from './EditDescription.style';
 
-interface Props {
-  name: string;
-}
+type Props = {
+    readonly name: string;
+};
 
-const EditDescription = ({name}: Props) => {
-  return (
-    <Container>
-      {name}
-    </Container>
-  );
+const EditDescription = ({ name }: Props) => {
+    return <Container>{name}</Container>;
 };
 
 export default EditDescription;

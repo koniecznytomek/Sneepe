@@ -1,19 +1,22 @@
 import React from 'react';
-import { Container } from './Note.style';
+// components
 import Markdown from '../../../features/Markdown/Markdown';
 
-interface Props {
-  text: string;
-}
+// styles
+import { Container } from './Note.style';
+
+type Props = {
+    readonly text: string;
+};
 
 const Note = ({ text }: Props) => {
-  return (
-    <Container>
-      <div className='note'>
-        <Markdown text={text} />
-      </div>
-    </Container>
-  );
+    return (
+        <Container>
+            <div className='note'>
+                <Markdown text={text} />
+            </div>
+        </Container>
+    );
 };
 
 export default Note;

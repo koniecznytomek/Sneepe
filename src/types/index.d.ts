@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
 
 export interface Node {
-  children: ReactNode;
+    readonly children: ReactNode;
 }

@@ -1,62 +1,59 @@
 import React, { useState } from 'react';
-import { Container } from './AddCollection.style';
-import { IconFolder } from '../../../assets/icons/Icons';
 
+// redux
 import { useDispatch, useSelector } from 'react-redux';
 import useRequest from '../../../api/useRequest';
 import { addCollection, getCollections } from '../../../slices/collections/collectionsSlice';
 
+// assets
+import { IconFolder } from '../../../assets/icons/Icons';
+
+// styles
+import { Container } from './AddCollection.style';
+
 const AddCollection = () => {
-  const [isAdding, setIsAdding] = useState(false);
-  const { updateCollectionsInApi } = useRequest();
+    const [isAdding, setIsAdding] = useState(false);
+    const { updateCollectionsInApi } = useRequest();
 
-  const dispatch = useDispatch();
-  const collections = useSelector(getCollections);
+    const dispatch = useDispatch();
+    const collections = useSelector(getCollections);
 
-  const handleAddCollection = async (e: any) => {
-    if (e.charCode === 13) {
-      e.preventDefault();
-      setIsAdding(false);
+    const handleAddCollection = async (e: any) => {
+        if (e.charCode === 13) {
+            e.preventDefault();
+            setIsAdding(false);
 
-      dispatch(addCollection(e.target.value));
+            dispatch(addCollection(e.target.value));
+            const updatedCollections = [...collections, { name: e.target.value, gists: [] }];
+            await updateCollectionsInApi(updatedCollections);
+        }
+    };
 
-      const updatedCollections = [
-        ...collections,
-        { name: e.target.value, gists: [] },
-      ];
-
-     await updateCollectionsInApi(updatedCollections);
-    }
-  };
-
-  return (
-    <Container>
-      <div className='add'>
-        <div className='form'>
-          {isAdding && (
-            <span className='new'>
-              <IconFolder />
-              <form>
-                <input
-                  autoFocus
-                  placeholder='Unnamed'
-                  onKeyPress={event => handleAddCollection(event)}
-                />
-              </form>
-            </span>
-          )}
-        </div>
-        <div className='button'>
-          <span
-            onClick={() => setIsAdding(!isAdding)}
-            className={`${isAdding ? 'adding' : 'default'}`}
-          >
-            +
-          </span>
-        </div>
-      </div>
-    </Container>
-  );
+    return (
+        <Container>
+            <div className='add'>
+                <div className='form'>
+                    {isAdding && (
+                        <span className='new'>
+                            <IconFolder />
+                            <form>
+                                <input
+                                    autoFocus
+                                    placeholder='Unnamed'
+                                    onKeyPress={event => handleAddCollection(event)}
+                                />
+                            </form>
+                        </span>
+                    )}
+                </div>
+                <div className='button'>
+                    <span onClick={() => setIsAdding(!isAdding)} className={`${isAdding ? 'adding' : 'default'}`}>
+                        +
+                    </span>
+                </div>
+            </div>
+        </Container>
+    );
 };
 
 export default AddCollection;

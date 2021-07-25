@@ -1,34 +1,34 @@
 export interface GistsState {
-  readonly gists: Gists[];
+    readonly gists: Gists[];
 }
 
 export interface Gists {
-  name: string;
-  description: string;
-  url: string;
-  createdAt: string;
-  updatedAt: string;
-  pushedAt: string;
-  isPublic: boolean;
-  isFork: boolean;
-  viewerHasStarred: boolean;
-  stargazerCount: number;
-  files: Files[];
+    readonly name: string;
+    readonly description: string;
+    readonly url: string;
+    readonly createdAt: string;
+    readonly updatedAt: string;
+    readonly pushedAt: string;
+    readonly isPublic: boolean;
+    readonly isFork: boolean;
+    readonly viewerHasStarred: boolean;
+    readonly stargazerCount: number;
+    readonly files: Files[];
 }
 
 export interface Files {
-  name: string;
-  text: string;
-  extension?: string;
-  size?: number;
-  language?: {
-    name: string;
-    color: string;
-  };
+    readonly name: string;
+    readonly text: string;
+    readonly extension?: string;
+    readonly size?: number;
+    readonly language?: {
+        readonly name: string;
+        readonly color: string;
+    };
 }
 
 export interface File {
-  name: string;
-  filename: string;
-  text: string;
+    readonly name: string;
+    readonly filename: string;
+    readonly text: string;
 }
