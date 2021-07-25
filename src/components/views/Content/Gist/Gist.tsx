@@ -54,11 +54,11 @@ const Gist = () => {
             {note && !location.pathname.includes('editnote') && <Note {...note} />}
             {gist.files
                 ?.filter(file => !file.name.includes('.sneepe.md'))
-                .map((file, i) => {
+                .map(file => {
                     if (file.extension !== '.md') {
-                        return <File key={i} files={gist.files} file={file} name={gist.name} />;
+                        return <File key={file.name} files={gist.files} file={file} name={gist.name} />;
                     } else {
-                        return <Note key={i} {...file} />;
+                        return <Note key={file.name} {...file} />;
                     }
                 })}
         </Container>

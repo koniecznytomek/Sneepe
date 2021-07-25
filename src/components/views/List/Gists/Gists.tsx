@@ -32,14 +32,15 @@ const Gists = () => {
         <Container ref={container}>
             <BarTop add={'allgists'} setSearch={(phrase: string) => setSearch(phrase)} />
             <ul>
-                {gists &&
-                    gists
-                        .filter(
-                            gist =>
-                                gist.files[0].name.toLowerCase().includes(search) ||
-                                gist.description.toLowerCase().includes(search)
-                        )
-                        .map((gist, i) => <Li key={i} gist={gist} slug={match.path} />)}
+                {gists
+                    ?.filter(
+                        gist =>
+                            gist.files[0].name.toLowerCase().includes(search) ||
+                            gist.description.toLowerCase().includes(search)
+                    )
+                    .map(gist => (
+                        <Li key={gist.name} gist={gist} slug={match.path} />
+                    ))}
             </ul>
             <Route exact path="/gists/allgists/">
                 <Redirect to={`${match.path}/${gists[0] && gists[0].name}`} />

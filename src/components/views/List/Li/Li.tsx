@@ -45,9 +45,9 @@ const Li = ({ slug, gist, collection }: Props) => {
                     <span className="desc">{gist.description}</span>
                     {lang &&
                         lang.map(
-                            (extension, i) =>
+                            extension =>
                                 extension && (
-                                    <span className="lang" key={i}>
+                                    <span className="lang" key={extension}>
                                         {extension}
                                     </span>
                                 )

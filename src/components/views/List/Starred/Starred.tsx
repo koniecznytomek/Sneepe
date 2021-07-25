@@ -38,8 +38,8 @@ const Starred = () => {
                             (gist.files[0].name.toLowerCase().includes(search) ||
                                 gist.description.toLowerCase().includes(search))
                     )
-                    .map((gist, i) => (
-                        <Li key={i} gist={gist} slug={match.path} />
+                    .map(gist => (
+                        <Li key={gist.name} gist={gist} slug={match.path} />
                     ))}
             </ul>
             <Route exact path="/gists/allgists/">

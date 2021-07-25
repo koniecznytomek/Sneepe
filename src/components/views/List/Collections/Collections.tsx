@@ -43,8 +43,8 @@ const Collections = () => {
         <Container ref={container}>
             <BarTop add={match.params.id} edit={match.params.id} setSearch={(phrase: string) => setSearch(phrase)} />
             <ul>
-                {result?.map((gist, i) => (
-                    <Li key={i} gist={gist} slug={match.url} collection={collection} />
+                {result?.map(gist => (
+                    <Li key={gist.name} gist={gist} slug={match.url} collection={collection} />
                 ))}
                 {!result.length && (
                     <li className="nofound">
