@@ -70,12 +70,16 @@ const Collections = () => {
         <Container>
             <AddCollection />
             <ul>
-                {collections?.map((col, i) => (
-                    <li key={i} onDrop={() => handleOnDrop(col.name, dragged)} onDragOver={e => handleOnDrag(e)}>
-                        <NavLink to={`/gists/${col.name}`} activeClassName="active">
+                {collections?.map(item => (
+                    <li
+                        key={item.name}
+                        onDrop={() => handleOnDrop(item.name, dragged)}
+                        onDragOver={e => handleOnDrag(e)}
+                    >
+                        <NavLink to={`/gists/${item.name}`} activeClassName="active">
                             <IconFolder />
-                            <span className="name">{col.name}</span>
-                            <span className="counter">{counter(col.name)}</span>
+                            <span className="name">{item.name}</span>
+                            <span className="counter">{counter(item.name)}</span>
                         </NavLink>
                     </li>
                 ))}
